@@ -51,7 +51,7 @@
 
 
 
-        var url_get = "frame_1.html";
+        var url_get = "https://penekjd.github.io/app/faq.html";
         var func_name = "frame_1_function";
         XML_HTTP_RQST(url_get, "FRAME_PUT", func_name);
     });
