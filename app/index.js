@@ -31,7 +31,7 @@
 
 
     document.getElementById("BTN_1").addEventListener('click', function () {
-        var url_get = "https://penekjd.github.io/app/faq.html";
+        var url_get = "https://penekjd.github.io/";
         var func_name = "frame_1_function";
         XML_HTTP_RQST(url_get, "FRAME_PUT", func_name);
     });
@@ -61,3 +61,4 @@ function XML_HTTP_RQST(url_get, div_id, func_name) {
     }
     XMLRQST.send();
 }
+
