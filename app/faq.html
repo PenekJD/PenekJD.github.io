@@ -1,11 +1,14 @@
 ﻿<div style='margin : 0px; overflow: hidden;' align="center">
-    <div onclick="TrySwitchTo();" style="font-family: Century Gothic; padding:20px; font-size: 30px; font-weight: bold; color:#fff; background: #fa0;">Добро пожаловать!</div>
+    <div id="HEADER_GET_1" style="font-family: Century Gothic; padding:20px; font-size: 30px; font-weight: bold; color:#fff; background: #fa0;">Добро пожаловать!</div>
 <script type="application/javascript">
     function TrySwitchTo(){
         var url_get = "https://penekjd.github.io";
         var func_name = "frame_1_function";
         XML_HTTP_RQST(url_get, "FRAME_PUT", func_name);
     }
+    document.getElementById("HEADER_GET_1").addEventListener('click', function(){ alert();
+        TrySwitchTo();
+    });
 </script>
 </div>
 
