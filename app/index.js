@@ -31,14 +31,6 @@
 
 
     document.getElementById("BTN_1").addEventListener('click', function () {
-        //Сохранение в Локальное хранилище
-        var Value_Get = document.getElementById("input_1").value;
-        var Value_Get_2 = document.getElementById("input_2").value;
-        localStorage.setItem('name', Value_Get);
-        localStorage.setItem('secondname', Value_Get_2);
-
-
-
         var url_get = "https://penekjd.github.io/app/faq.html";
         var func_name = "frame_1_function";
         XML_HTTP_RQST(url_get, "FRAME_PUT", func_name);
