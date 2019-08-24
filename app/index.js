@@ -36,24 +36,6 @@
         XML_HTTP_RQST(url_get, "FRAME_PUT", func_name);
     });
 
-
-    /*
-        Отправка запроса и получения ответа
-     */
-    function XML_HTTP_RQST(url_get, div_id, func_name) {
-        var XMLRQST = new XMLHttpRequest();
-        XMLRQST.open('GET', url_get, true);
-        XMLRQST.onload = function (e) {
-            if (XMLRQST.status === 200) {
-                document.getElementById(div_id).innerHTML = XMLRQST.responseText;
-                window[func_name]();
-            } else {
-                alert("No response at XMLHttpRequest: Status = " + XMLRQST.status);
-            }
-        }
-        XMLRQST.send();
-    }
-
 })();
 
 /*
@@ -61,4 +43,21 @@
  */
 function frame_1_function() {
     document.getElementById("INTRO_TABLE").style.display = "none";
+}
+
+/*
+    Отправка запроса и получения ответа
+ */
+function XML_HTTP_RQST(url_get, div_id, func_name) {
+    var XMLRQST = new XMLHttpRequest();
+    XMLRQST.open('GET', url_get, true);
+    XMLRQST.onload = function (e) {
+        if (XMLRQST.status === 200) {
+            document.getElementById(div_id).innerHTML = XMLRQST.responseText;
+            window[func_name]();
+        } else {
+            alert("No response at XMLHttpRequest: Status = " + XMLRQST.status);
+        }
+    }
+    XMLRQST.send();
 }
