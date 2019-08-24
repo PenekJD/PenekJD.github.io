@@ -43,6 +43,7 @@
  */
 function frame_1_function() {
     document.getElementById("INTRO_TABLE").style.display = "none";
+    Slide_1_Listeners();
 }
 
 /*
@@ -60,5 +61,20 @@ function XML_HTTP_RQST(url_get, div_id, func_name) {
         }
     }
     XMLRQST.send();
+}
+
+
+function TrySwitchTo(){
+    var url_get = "https://penekjd.github.io";
+    var func_name = "frame_1_function";
+    XML_HTTP_RQST(url_get, "FRAME_PUT", func_name);
+}
+function Slide_1_Listeners(){
+    document.getElementById("HEADER_GET_1").addEventListener('click', function(){
+        TrySwitchTo();
+    });
+    document.getElementById("HEY").addEventListener('click', function(){
+        TrySwitchTo();
+    });
 }
 
