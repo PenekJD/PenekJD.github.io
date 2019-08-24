@@ -40,8 +40,8 @@
     /*
         Отправка запроса и получения ответа
      */
-    function XML_HTTP_RQST(url_get, div_id, func_name) {
-        var XMLRQST = new XMLHttpRequest();
+    function XML_HTTP_RQST(url_get, div_id, func_name) {	alert(0);
+        var XMLRQST = new XMLHttpRequest();			alert(1);
         XMLRQST.open('GET', url_get, true);
         XMLRQST.onload = function (e) {
             if (XMLRQST.status === 200) {
