@@ -29,18 +29,6 @@
         // TODO: Это приложение активировано повторно. Восстановите здесь состояние приложения.
     };
 
-    function CheckLocalData() {
-        var GetLocal_value_1;   //Имя
-        var GetLocal_value_2;   //Фамилия
-        try {
-            GetLocal_value_1 = localStorage.getItem('name');
-        } catch (no) { GetLocal_value_1 = ""; }
-        try {
-            GetLocal_value_2 = localStorage.getItem('secondname');
-        } catch (no) { GetLocal_value_2 = ""; }
-        document.getElementById("input_1").value = GetLocal_value_1;
-        document.getElementById("input_2").value = GetLocal_value_2;
-    }
 
     document.getElementById("BTN_1").addEventListener('click', function () {
         //Сохранение в Локальное хранилище
