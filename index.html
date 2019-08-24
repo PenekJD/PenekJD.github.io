@@ -9,7 +9,7 @@
     <script type="text/javascript" src="ar.js"></script>
 </head>
 <body style='margin : 0px; overflow: hidden;'>
-  <a-scene embedded arjs>
+  <a-scene embedded arjs='detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
      <!-- <a-box position="-1 0.5 0" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
       <a-sphere position="0 1.25 -1" radius="1.25" color="#EF2D5E" shadow></a-sphere>
       <a-cylinder position="1 0.75 0" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
@@ -20,7 +20,8 @@
       </a-assets>
       <a-entity gltf-model="#tree" scale="0.35 0.35 0.35" position="0 0 0" rotation="0 0 0"></a-entity>
 
-    <a-marker-camera preset='hiro'></a-marker-camera>
+   <!-- <a-marker-camera preset='hiro'></a-marker-camera> -->
+      <a-marker type='barcode' value='5'></a-marker> <a-scene ></a-scene>
   </a-scene>
 </body>
 </html>
