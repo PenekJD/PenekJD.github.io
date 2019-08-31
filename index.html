@@ -13,11 +13,14 @@
     <script>
         function testAjax() {
             $.ajax({
-                url:'/requests/rqst_1.html',
+                url:'https://penekjd.github.io/requests/rqst_1.html',
                 data: {},
                 type: 'post',
                 success: function(resp) {
                     $("#AJAX_INJECT_MAIN").html(resp);
+                },
+                error: function(){
+                    alert("Ajax can't work it out! :C");
                 }
             });
         }
