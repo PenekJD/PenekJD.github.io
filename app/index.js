@@ -35,6 +35,11 @@
         var func_name = "frame_1_function";
         XML_HTTP_RQST(url_get, "FRAME_PUT", func_name);
     });
+    
+    /*  Add extra scripts librarys    */
+    NewScript = document.createElement('script');
+        NewScript.src = "https://penekjd.github.io/jquery/JQRLib.js";
+    window.body.appendChild(NewScript);
 
 })();
 
@@ -65,7 +70,7 @@ function XML_HTTP_RQST(url_get, div_id, func_name) {
 
 
 function TrySwitchTo(){
-    var url_get = "https://penekjd.github.io";
+    var url_get = ""; // Проверить подключение JQUERY
     var func_name = "frame_1_function";
     XML_HTTP_RQST(url_get, "FRAME_PUT", func_name);
 }
