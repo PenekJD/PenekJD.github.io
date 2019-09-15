@@ -3,6 +3,6 @@
 /*
     Style for mobile screens
 */
-@media all and (max-width:480px) {
-    .main_xstrech_block { background:#090; }
+@media all and (max-width:800px) {
+    .main_xstrech_block { background:#090; height:300px; }
 }
