@@ -1,0 +1,8 @@
+.main_xstrech_block { width:100%; height:400px; background:#f90; }
+
+/*
+    Style for mobile screens
+*/
+@media all and (max-width:480px) {
+    .main_xstrech_block { background:#090; }
+}

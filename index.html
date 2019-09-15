@@ -4,28 +4,10 @@
 	<meta charset="UTF-8"/>
 	<title>Hi, I am jD</title>
     <script type="text/javascript" src="jquery/JQRLib.js"></script>
+    <link href="main_css.css"/>
 </head>
 <body style='margin : 0px; overflow: hidden;' align="center">
-    <div id="AJAX_INJECT_MAIN">
-    
-    </div>
-    <div><iframe src="ar.html"></iframe></div>
-    <input type="button" onclick="testAjax();">
-    <script>
-        function testAjax() {
-            $.ajax({
-                url:'https://penekjd.github.io/requests/rqst_1.html',
-                data: {},
-                type: 'post',
-                success: function(resp) {
-                    $("#AJAX_INJECT_MAIN").html(resp);
-                },
-                error: function(){
-                    alert("Ajax can't work it out! :C");
-                }
-            });
-        }
-    </script>
+    <div class="main_xstrech_block"> test </div>
 </body>
 </html>
 
