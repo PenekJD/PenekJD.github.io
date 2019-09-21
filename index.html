@@ -13,6 +13,24 @@
                 <h1>jD's personal GitHub page</h1>
             </div>    
         </div>
+        <div> TEST JS INJECT </div>
+        <script>                
+            function loadJSON(callback) {
+                var xobj = new XMLHttpRequest();
+                xobj.overrideMimeType("application/json");
+                xobj.open('GET', 'mainjson.json', true);
+                xobj.onreadystatechange = function() {
+                    if (xobj.readyState == 4 && xobj.status == "200") {
+                        callback(xobj.responseText);
+                    }
+                }
+                xobj.send(null);
+            }
+            loadJSON(function(response) {
+                jsonresponse = JSON.parse(response);
+                console.log(jsonresponse[0].tables[0].name);
+            });
+        </script>
     </div>
 </body>
 </html>

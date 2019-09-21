@@ -1,0 +1,14 @@
+{
+    "tables" : [
+        {
+            "name" : "news",
+            "objects" : [
+                {
+                    "title" : "My first news",
+                    "content" : "",
+                    "imgs" : []
+                }
+            ]
+        }
+    ]
+}
