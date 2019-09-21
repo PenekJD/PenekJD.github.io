@@ -3,4 +3,4 @@ _PUBLIC_MAIN_LOADER_HTML_DOC_ = `
         <div style="padding:15px;">Hello, man!</div>
     </div>
 `;
-GENERATE_EXTRA_HTML_DOC('MAIN_PUBLIC_ID_TOP');
+GENERATE_EXTRA_HTML_DOC();

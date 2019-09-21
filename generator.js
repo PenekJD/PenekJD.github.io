@@ -10,7 +10,7 @@ function CreateScriptPage(src_frame){
     return _NewScript_;
 }
 
-function MAIN_GENERATOR_STARTER(src_file) {
+function MAIN_GENERATOR_STARTER(src_file) { 
     URL_GET_STRING = window.location.href+'';
     if (src_file==undefined || src_file=="") {
         main_param_string = "js_frame_1";
@@ -33,18 +33,16 @@ function MAIN_GENERATOR_STARTER(src_file) {
     PAGE_GENERATOR('src/'+main_param_string+'.js', extra_params_array);
 }
 
-function GENERATE_EXTRA_HTML_DOC(injectblockid) {
+function GENERATE_EXTRA_HTML_DOC(injectblockid) {  
     GEN_DIV = document.createElement("div");
     GEN_DIV.innerHTML = _PUBLIC_MAIN_LOADER_HTML_DOC_;
     if (injectblockid==undefined || injectblockid=="") {
-        document.body.appendChild(GEN_DIV);  
+       document.body.appendChild(GEN_DIV);  
     } else {
         document.getElementById(injectblockid).innerHTML = _PUBLIC_MAIN_LOADER_HTML_DOC_;
     }
 }
 
 /* Page creation by parts */
-window.onload = function() { 
-    MAIN_GENERATOR_STARTER('js_head_mp');
-    MAIN_GENERATOR_STARTER('js_frame_1');
-}
+MAIN_GENERATOR_STARTER('js_head_mp');
+MAIN_GENERATOR_STARTER('js_frame_1');
