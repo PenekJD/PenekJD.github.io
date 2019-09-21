@@ -1,5 +1,4 @@
-{
-    "tables" : [
+_PUB_DB_JSON_ = [
         {
             "name" : "news",
             "objects" : [
@@ -10,5 +9,4 @@
                 }
             ]
         }
-    ]
-}
+    ];
