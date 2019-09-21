@@ -4,13 +4,16 @@ h1 { font-family: Tahoma; font-weight:bold; color:#fff; text-shadow:1px 1px 1px 
 .main_xstrech_block { width:100%; height:400px; }
 .main_grid_block { position: relative;}
 
-.CONTAINER_MAIN_PAGE { position:relative; top:-80px; box-shadow:0 0 15px rgba(0,0,0,0.5); background:#fff; width:1000px; }
+.CONTAINER_MAIN_PAGE { background:#fff; width:1000px; }
 
 .NEWS_CONTAINER_CLASS { padding:50px; }
 
-.NEWS_BLOCK_DIV { padding:5px; border:1px solid #aaa; }
+.NEWS_BLOCK_DIV { padding:15px; box-shadow: 0 0 4px rgba(0,0,0,0.2); margin:10px; }
+.NEWS_BLOCK_DIV:hover { box-shadow: 0 0 6px rgba(0,0,0,0.5); }
 
 /*    Style for mobile screens  */
-@media all and (max-width:800p-x) {
+@media all and (max-width:800px) {
+    h1 { font-size: 18px; }
    /* .main_xstrech_block { background:#090; height:300px; } */
+    .CONTAINER_MAIN_PAGE { display:flex; width:100%; }
 }
