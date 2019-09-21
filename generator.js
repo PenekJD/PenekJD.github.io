@@ -13,7 +13,7 @@ function CreateScriptPage(src_frame){
 function MAIN_GENERATOR_STARTER(src_file) { 
     URL_GET_STRING = window.location.href+'';
     if (src_file==undefined || src_file=="") {
-        main_param_string = "js_frame_1";
+        main_param_string = "js_index";
     } else { main_param_string = src_file; }
     extra_params_array = [];
     _Values_ = URL_GET_STRING.split('?');
@@ -26,7 +26,7 @@ function MAIN_GENERATOR_STARTER(src_file) {
             if (ParName=="docname") { 
                 main_param_string = ParValue;  
             } else {
-                main_param_string = "js_frame_1";
+                main_param_string = "js_index";
             }
         }
     }
@@ -44,5 +44,4 @@ function GENERATE_EXTRA_HTML_DOC(injectblockid) {
 }
 
 /* Page creation by parts */
-MAIN_GENERATOR_STARTER('js_head_mp');
-MAIN_GENERATOR_STARTER('js_frame_1');
+MAIN_GENERATOR_STARTER('js_index');
