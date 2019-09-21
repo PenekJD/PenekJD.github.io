@@ -44,5 +44,7 @@ function GENERATE_EXTRA_HTML_DOC(injectblockid) {
 }
 
 /* Page creation by parts */
-MAIN_GENERATOR_STARTER('js_head_mp');
-MAIN_GENERATOR_STARTER('js_frame_1');
+window.onload = function() { 
+    MAIN_GENERATOR_STARTER('js_head_mp');
+    MAIN_GENERATOR_STARTER('js_frame_1');
+}
