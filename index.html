@@ -14,7 +14,7 @@
                     <div style="padding:10px;">
                         <div style="border:4px solid #c966ff; border-radius:100px; width:150px; height:150px; display: inline-block; background-color:#fff;"></div>
                     </div>
-                    <div style="padding:15px; /* background:rgba(0,0,0,0.5); */ font-size: 1cm; color:#fff; text-shadow:1px 1px 1px rgba(0,0,0,1);">
+                    <div onclick="TEST_FS();" style="padding:15px; /* background:rgba(0,0,0,0.5); */ font-size: 1cm; color:#fff; text-shadow:1px 1px 1px rgba(0,0,0,1);">
                         Приветствую
                     </div>
                 </td>
@@ -26,6 +26,25 @@
         function StartAllGame(){
             
         }
+        
+        function TEST_FS() {
+            document.body.webkitRequestFullscreen();            
+        }
+        
+        /*
+        function openFullscreen() {
+          if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+          } else if (elem.mozRequestFullScreen) { // Firefox 
+            elem.mozRequestFullScreen();
+          } else if (elem.webkitRequestFullscreen) { // Chrome, Safari and Opera
+            elem.webkitRequestFullscreen();
+          } else if (elem.msRequestFullscreen) { // IE/Edge
+            elem.msRequestFullscreen();
+          }
+        }
+        */
+
     </script>
 </body>
 </html>
