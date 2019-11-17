@@ -8336,7 +8336,7 @@ AFRAME.registerComponent('arjs-anchor', {
 
             if (_this.data.preset === 'hiro') {
                 markerParameters.type = 'pattern'
-                markerParameters.patternUrl = THREEx.ArToolkitContext.baseURL + 'examples/marker-training/examples/pattern-files/pattern-hiro.patt'
+                markerParameters.patternUrl = 'src/patterns/pat1.patt'
                 markerParameters.markersAreaEnabled = false
             } else if (_this.data.preset === 'kanji') {
                 markerParameters.type = 'pattern'
