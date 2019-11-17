@@ -18,6 +18,9 @@
                     <div onclick="TEST_FS();" style="padding:15px; /* background:rgba(0,0,0,0.5); */ font-size: 1cm; color:#fff; text-shadow:1px 1px 1px rgba(0,0,0,1);">
                         Приветствую
                     </div>
+                    <div onclick="window.location.href='/ar.html';" style="padding:15px; /* background:rgba(0,0,0,0.5); */ font-size: 1cm; color:#fff; text-shadow:1px 1px 1px rgba(0,0,0,1);">
+                        LINK
+                    </div>
                 </td>
             </tr>
         </table>
@@ -30,22 +33,20 @@
         }
         
         function TEST_FS() {
-            document.body.webkitRequestFullscreen();            
+            function openFullscreen() {
+              if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+              } else if (elem.mozRequestFullScreen) { // Firefox 
+                elem.mozRequestFullScreen();
+              } else if (elem.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                elem.webkitRequestFullscreen();
+              } else if (elem.msRequestFullscreen) { // IE/Edge
+                elem.msRequestFullscreen();
+              }
+            }
+            openFullscreen();
         }
         
-        /*
-        function openFullscreen() {
-          if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-          } else if (elem.mozRequestFullScreen) { // Firefox 
-            elem.mozRequestFullScreen();
-          } else if (elem.webkitRequestFullscreen) { // Chrome, Safari and Opera
-            elem.webkitRequestFullscreen();
-          } else if (elem.msRequestFullscreen) { // IE/Edge
-            elem.msRequestFullscreen();
-          }
-        }
-        */
 
     </script>
 </body>
