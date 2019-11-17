@@ -8,7 +8,7 @@
 <body style="margin : 0px; background:#C966FF; font-family: Tahoma;" align="center">
 <div style="position:fixed; top:0px; left:0px; width:100%; height:100%; background-image: url('src/Julie_wallpaper.jpg'); background-size:cover; background-position: center center; ">
     
-    <div style="width:100%; height:100%; position:absolute; top:0px; left:0px;">
+    <div id="HELLO_BLOCK" style="width:100%; height:100%; position:absolute; top:0px; left:0px;">
         <table style="border-collapse: collapse; width:100%; height:100%; position: absolute; top:0px; left:0px;">
             <tr>
                 <td style="text-align:center; vertical-align: middle; width:100%; height:100%;">
@@ -18,7 +18,7 @@
                     <div onclick="TEST_FS();" style="padding:15px; /* background:rgba(0,0,0,0.5); */ font-size: 1cm; color:#fff; text-shadow:1px 1px 1px rgba(0,0,0,1);">
                         Приветствую
                     </div>
-                    <div onclick="window.location.href='/ar.html';" style="padding:15px; /* background:rgba(0,0,0,0.5); */ font-size: 1cm; color:#fff; text-shadow:1px 1px 1px rgba(0,0,0,1);">
+                    <div onclick="OPEN_AFRAME_AR();" style="padding:15px; /* background:rgba(0,0,0,0.5); */ font-size: 1cm; color:#fff; text-shadow:1px 1px 1px rgba(0,0,0,1);">
                         LINK 
                     </div>
                 </td>
@@ -26,10 +26,26 @@
         </table>
     </div>
     
+    <div id="AFRAME_DIV" style="position:absolute; top:0px; left:0px; width:100%; height:100%; display:none;">
+        <iframe id="MAIN_AFRAME" src="" style="width:100%; height:100%; position: absolute; top:0px; left:0px;"></iframe>
+    </div>
+    
+    
 </div>
     <script>
         function StartAllGame(){
             
+        }
+    
+        function OPEN_AFRAME_AR() {
+            HELLO_BLOCK = document.getElementById("HELLO_BLOCK");
+            AFRAME_DIV = document.getElementById("AFRAME_DIV");
+                MAIN_AFRAME = document.getElementById("MAIN_AFRAME");
+            $(HELLO_BLOCK).fadeOut(300);
+            setTimeout(function(){
+                $(AFRAME_DIV).fadeIn(300);
+                MAIN_AFRAME.src = "ar.html";
+            }, 300);
         }
         
         function TEST_FS() {
