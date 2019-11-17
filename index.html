@@ -34,14 +34,14 @@
         
         function TEST_FS() {
             function openFullscreen() {
-              if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-              } else if (elem.mozRequestFullScreen) { // Firefox 
-                elem.mozRequestFullScreen();
-              } else if (elem.webkitRequestFullscreen) { // Chrome, Safari and Opera
-                elem.webkitRequestFullscreen();
-              } else if (elem.msRequestFullscreen) { // IE/Edge
-                elem.msRequestFullscreen();
+              if (document.body.requestFullscreen) {
+                document.body.requestFullscreen();
+              } else if (document.body.mozRequestFullScreen) { // Firefox 
+                document.body.mozRequestFullScreen();
+              } else if (document.body.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                document.body.webkitRequestFullscreen();
+              } else if (document.body.msRequestFullscreen) { // IE/Edge
+                document.body.msRequestFullscreen();
               }
             }
             openFullscreen();
