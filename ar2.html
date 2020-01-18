@@ -17,12 +17,17 @@
 
 		<!-- handle matrix marker -->
 		<a-marker type='barcode' value='1'>
-			<a-plane color="#fff" height="2" width="2" rotation="-90 0 0" src="src/img/text_1.png"></a-plane>
-            <div style="position:fixed; bottom:0px; left:0px; width:100px; height:100px; background:#f00;">TEST</div>
+			<a-plane color="#fff" height="2" width="2" rotation="-90 0 0" src="src/img/text_1.png" onclick="HAHAHA();">
+                <div style="width:100px; height:100px; background:#f00;">hmmm</div>
+            </a-plane>
+            
 		</a-marker>
 
 		<a-entity camera></a-entity>
   </a-scene>
+    <script>
+        function HAHAHA() { alert("HAHAHA"); };
+    </script>
 </body>
 </html>
 
