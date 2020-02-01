@@ -3,7 +3,7 @@
 	<meta charset="UTF-8"/>
 	<title>WebTutor_Extras</title>
 	<style>
-		.MAIN_MENU_HEAD_LINE { position:fixed; bottom:0px; left:0px; height:10%; width:100%; background:#fff; box-shadow:0 0 30px rgba(0,0,0,1);}
+		.MAIN_MENU_HEAD_LINE { position:fixed; bottom:0px; left:0px; padding-bottom: 0.5em; padding-top: 0.5em; font-size:3em; width:100%; background:#fff; box-shadow:0 0 30px rgba(0,0,0,1);}
 		.STYLE_UNDERALLSITE_BLOCK_FOR_MENU { height:10%; }
 
 		.INFO_BLOCK_MAIN {  }
@@ -67,11 +67,12 @@
 			</code>
 		</div>
 	</div>
+	<div id="USERNAME_CONTAINER_VALUE" style="display:none;">***USERNAME***</div>
 
 	<script>
 		var _GLOBAL_VALUES_ = { 
 			username: "***USERNAME***",
-			current_version: "01_02_2020_2"
+			current_version: "01_02_2020_3"
 		};
 		function _CODE_VIEWER_MAKER() {
 			function TextReplacer(text_get) {
@@ -116,6 +117,11 @@
 				_ALL_DOCUMENT_.innerHTML = _NAME_PUSH_.replace(/\*\*\*USERNAME\*\*\*/g, _newname_);
 		}
 
+		function _IT_IS_NEW_VERSION_() {
+			_UserName_ = document.getElementById("USERNAME_CONTAINER_VALUE").innerHTML+'';
+			alert("Ура, "+_UserName_+"!\n Появились новые обновления!");
+		}
+
 		function _COMPARE_LOCAL_STORAGE_FILES_() {
 			_CurrentVersion_ = _GLOBAL_VALUES_.current_version;
 			_LS_Version_ = localStorage.getItem("ls_cversion");
@@ -124,6 +130,13 @@
 			function _SET_UPLOAD_VERSION_(){
 				localStorage.setItem("ls_cversion", _CurrentVersion_);
 			}
+				if (_LS_USERNAME_==undefined || _LS_USERNAME_==null) {
+					_NEWUSERNAME_ = prompt("Привет! Как мне к Вам обращаться?");
+					localStorage.setItem("ls_username", _NEWUSERNAME_);
+					_NAMEREPLACER_(_NEWUSERNAME_);
+				} else {
+					_NAMEREPLACER_(_LS_USERNAME_);
+				}
 
 				if (_LS_Version_==undefined || _LS_Version_==null) {
 					_SET_UPLOAD_VERSION_();
@@ -133,14 +146,8 @@
 					} else {
 						// New version
 						_SET_UPLOAD_VERSION_();
+						_IT_IS_NEW_VERSION_();
 					}
-				}
-				if (_LS_USERNAME_==undefined || _LS_USERNAME_==null) {
-					_NEWUSERNAME_ = prompt("Привет! Как мне к Вам обращаться?");
-					localStorage.setItem("ls_username", _NEWUSERNAME_);
-					_NAMEREPLACER_(_NEWUSERNAME_);
-				} else {
-					_NAMEREPLACER_(_LS_USERNAME_);
 				}
 		}
 
