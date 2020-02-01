@@ -1,0 +1,106 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>WebTutor_Extras</title>
+	<style>
+		.INFO_BLOCK_MAIN {  }
+		.IBM_HEAD_TITLE { padding:20px; background:#ddd; color:#444; font-size:28px; font-weight:bold; }
+		.IBM_CONTENT { padding:20px; color:#333; background:#eee; }
+		code { background:#444; color:#fff; padding:10px; font-family:Monospace; display:block; margin:8px;}
+	</style>
+</head>
+<body style="font-family:Tahoma;">
+	<div align="center" style="padding:30px;">
+		<div style="font-weight:bold; font-size:20px;">WEBTUTOR ПО-БОЖЕСКИ</div>
+		<div>- шпаргалка разработчика -</div>
+		<div style="padding:20px;">
+			<div>Привет, как мне к Вам обращаться?</div>
+			<div><input id="INTRODUCTION_MYSELF_INPUT" type="text" value=""><input type="button" value="ОК" onclick="_IntroduceMyself('INTRODUCTION_MYSELF_INPUT');"></div>
+		</div>
+	</div>
+	<div class="INFO_BLOCK_MAIN">
+		<div class="IBM_HEAD_TITLE">Обращение к серверу</div>
+		<div class="IBM_CONTENT">
+			Привет, ***USERNAME***!<br>
+			Я предполагаю, что ты уже знаешь как создавать веб-страницы. Сейчас моей задачей является научить тебя пользоваться серверными командами платформы WebTutor, чтобы у тебя получилось выгружать данные из базы ВебТутор прямиком на твою страничку и пользователи твоего портала могли бы взглянуть на это чудо.
+			<code>
+				&lt;html&gt;<br>
+					&lt;head&gt;<br>&nbsp; &lt;title&gt; Моя страница в ВебТуторе &lt;/title&gt;<br>&lt;/head&gt;
+				<br>
+				&lt;body&gt;<br>
+				<%<br>
+					/* Зона серверного JavaScript <br> Интерпритатор WebTutor начинает обработку кода на стороне сервера */
+				<br>%><br>
+				Зона HTML
+				<br>
+				&lt;/body&gt;<br>
+				&lt;/html&gt;
+			</code>
+			<code>
+				&lt;html&gt;<br>
+					&lt;head&gt;<br>&nbsp; &lt;title&gt; Моя страница в ВебТуторе &lt;/title&gt;<br>&lt;/head&gt;
+				<br>
+				&lt;body&gt;<br>
+				<%<br>
+					/* Создаём переменную на стороне сервера */<br>
+					_MyValue_ = "Моя переменная";
+				<br>%><br>
+				<%=_MyValue_%>
+				<br>
+				&lt;/body&gt;<br>
+				&lt;/html&gt;
+			</code>
+		</div>
+	</div>
+
+	<script>
+		var _GLOBAL_VALUES_ = { username: "***USERNAME***" };
+		function _CODE_VIEWER_MAKER() {
+			function TextReplacer(text_get) {
+				_SERVER_CODE_COLOR_ = "#f00";
+				_FUNCTION_CODE_COLOR_ = "#f90";
+				_COMMENT_CODE_COLOR_ = "#aaa";
+				_HTML_TAGS_COLOR_ = "#7a0";
+				NewCode = text_get;
+					NewCode = NewCode.replace(/&lt;%=/g, "<span style='color:"+_SERVER_CODE_COLOR_+";'><%=</span>");
+					NewCode = NewCode.replace(/&lt;%/g, "<span style='color:"+_SERVER_CODE_COLOR_+";'><%</span>");
+					NewCode = NewCode.replace(/%&gt;/g, "<span style='color:"+_SERVER_CODE_COLOR_+";'>%></span>");	
+
+					NewCode = NewCode.replace(/function/g, "<span style='color:"+_FUNCTION_CODE_COLOR_+";'>function</span>");
+
+					NewCode = NewCode.replace(/\/\*/g, "<span style='color:"+_COMMENT_CODE_COLOR_+";'>/*");
+					NewCode = NewCode.replace(/\*\//g, "*/</span>");
+
+					NewCode = NewCode.replace(/&lt;html&gt;/g, "<span style='color:"+_HTML_TAGS_COLOR_+";'>&lt;html&gt;</span>");
+					NewCode = NewCode.replace(/&lt;\/html&gt;/g, "<span style='color:"+_HTML_TAGS_COLOR_+";'>&lt;\/html&gt;</span>");
+					NewCode = NewCode.replace(/&lt;title&gt;/g, "<span style='color:"+_HTML_TAGS_COLOR_+";'>&lt;title&gt;</span>");
+					NewCode = NewCode.replace(/&lt;\/title&gt;/g, "<span style='color:"+_HTML_TAGS_COLOR_+";'>&lt;\/title&gt;</span>");
+					NewCode = NewCode.replace(/&lt;body&gt;/g, "<span style='color:"+_HTML_TAGS_COLOR_+";'>&lt;body&gt;</span>");
+					NewCode = NewCode.replace(/&lt;\/body&gt;/g, "<span style='color:"+_HTML_TAGS_COLOR_+";'>&lt;\/body&gt;</span>");
+					NewCode = NewCode.replace(/&lt;head&gt;/g, "<span style='color:"+_HTML_TAGS_COLOR_+";'>&lt;head&gt;</span>");
+					NewCode = NewCode.replace(/&lt;\/head&gt;/g, "<span style='color:"+_HTML_TAGS_COLOR_+";'>&lt;\/head&gt;</span>");
+				return NewCode;	
+			}
+			_All_Code_Frames_ = document.getElementsByTagName('code');
+			for (a=0; a<_All_Code_Frames_.length; a++) {	
+				_CodeElement_ = _All_Code_Frames_[a];
+				_CodeElement_.innerHTML = TextReplacer(_CodeElement_.innerHTML);
+			}
+		}
+		window.onload = function() {
+			_CODE_VIEWER_MAKER();
+		}
+
+		function _IntroduceMyself(value_input_id) {
+			_element_value_ = document.getElementById(value_input_id).value+'';
+			_NAMEREPLACER_(_element_value_);
+		}
+		function _NAMEREPLACER_(_newname_) {
+			_GETNAME_ = _GLOBAL_VALUES_.username;
+			_ALL_DOCUMENT_ = document.getElementsByTagName('body')[0];
+				_NAME_PUSH_ = _ALL_DOCUMENT_.innerHTML+'';
+				_ALL_DOCUMENT_.innerHTML = _NAME_PUSH_.replace(/\*\*\*USERNAME\*\*\*/g, _element_value_);
+		}
+	</script>
+</body>
+</html>
