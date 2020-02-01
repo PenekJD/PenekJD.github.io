@@ -3,11 +3,12 @@
 	<meta charset="UTF-8"/>
 	<title>WebTutor_Extras</title>
 	<style>
-		.MAIN_MENU_HEAD_LINE { position:fixed; top:0px; left:0px; height:10%; width:100%; background:#fff; box-shadow:0 0 10px rgba(0,0,0,1);}
+		.MAIN_MENU_HEAD_LINE { position:fixed; bottom:0px; left:0px; height:10%; width:100%; background:#fff; box-shadow:0 0 30px rgba(0,0,0,1);}
+		.STYLE_UNDERALLSITE_BLOCK_FOR_MENU { height:10%; }
 
 		.INFO_BLOCK_MAIN {  }
-		.IBM_HEAD_TITLE { padding:20px; background:#ddd; color:#444; font-size:28px; font-weight:bold; }
-		.IBM_CONTENT { padding:20px; color:#333; background:#eee; }
+		.IBM_HEAD_TITLE { padding:20px; background:#ddd; color:#444; font-size:28px; font-weight:bold; font-family: Trebuchet MS; }
+		.IBM_CONTENT { padding:20px; color:#333; background:#eee; font-family: Trebuchet MS; }
 		code { background:#444; color:#fff; padding:10px; font-family:Monospace; display:block; margin:8px;}
 	</style>
 </head>
@@ -16,17 +17,19 @@
 	<div id="OPENING_SCREEN" align="center" style="position:fixed; top:0px; left:0px; width:100%; height:100%; background:#000; z-index:100;">
 		<table style="position:absolute; top:0px; left:0px; width:100%; height:100%;"><tr><td style="width:100%; height:100%; vertical-align: middle; text-align:center; padding:30px; color:#fff; ">
 			<div></div>
-			<div style="font-weight:bold; font-size:4em;">WEBTUTOR ПО-БОЖЕСКИ</div>
-			<div style="font-size:2em;">-  ш п а р г а л к а&nbsp;&nbsp;&nbsp;р а з р а б о т ч и к а  -</div>
+			<div style="font-weight:bold; font-size:4em; font-family: Trebuchet MS;">СВЯТОЙ WEBTUTOR</div>
+			<div style="font-size:2em; font-family: Trebuchet MS;">-  ш п а р г а л к а&nbsp;&nbsp;&nbsp;р а з р а б о т ч и к а  -</div>
 		</td></tr></table>
+		<div style="position:absolute; bottom:0px; left:0px; width:100%; color:#fff;">
+			<div align="center" style="padding:30px; color:#fff; font-family: Trebuchet MS;">Гринчик Дмитрий</div>
+		</div>
 	</div>
 
 	<div class="MAIN_MENU_HEAD_LINE" align="center">
 		Меню
 	</div>
-	<div style="height:10%;"></div>
 
-	<div style="padding:20px;">
+	<div style="padding:20px; display:none;">
 		<div>Привет, как мне к Вам обращаться?</div>
 		<div><input id="INTRODUCTION_MYSELF_INPUT" type="text" value=""><input type="button" value="ОК" onclick="_IntroduceMyself('INTRODUCTION_MYSELF_INPUT');"></div>
 	</div>
@@ -141,5 +144,6 @@
 			}, 1000);
 		}
 	</script>
+	<div class="STYLE_UNDERALLSITE_BLOCK_FOR_MENU"></div>
 </body>
 </html>
