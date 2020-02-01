@@ -3,6 +3,8 @@
 	<meta charset="UTF-8"/>
 	<title>WebTutor_Extras</title>
 	<style>
+		.MAIN_MENU_HEAD_LINE { position:fixed; top:0px; left:0px; height:50px; width:100%; background:#40AA9C; box-shadow:0 0 10px rgba(0,0,0,1);}
+
 		.INFO_BLOCK_MAIN {  }
 		.IBM_HEAD_TITLE { padding:20px; background:#ddd; color:#444; font-size:28px; font-weight:bold; }
 		.IBM_CONTENT { padding:20px; color:#333; background:#eee; }
@@ -10,13 +12,23 @@
 	</style>
 </head>
 <body style="font-family:Tahoma;">
-	<div align="center" style="padding:30px;">
-		<div style="font-weight:bold; font-size:20px;">WEBTUTOR ПО-БОЖЕСКИ</div>
-		<div>- шпаргалка разработчика -</div>
-		<div style="padding:20px;">
-			<div>Привет, как мне к Вам обращаться?</div>
-			<div><input id="INTRODUCTION_MYSELF_INPUT" type="text" value=""><input type="button" value="ОК" onclick="_IntroduceMyself('INTRODUCTION_MYSELF_INPUT');"></div>
-		</div>
+
+	<div id="OPENING_SCREEN" align="center" style="position:fixed; top:0px; left:0px; width:100%; height:100%; background:#000; z-index:100;">
+		<table style="position:absolute; top:0px; left:0px; width:100%; height:100%;"><tr><td style="width:100%; height:100%; vertical-align: middle; text-align:center; padding:30px; color:#fff; ">
+			<div></div>
+			<div style="font-weight:bold; font-size:24px;">WEBTUTOR ПО-БОЖЕСКИ</div>
+			<div>-  ш п а р г а л к а&nbsp;&nbsp;&nbsp;р а з р а б о т ч и к а  -</div>
+		</td></tr></table>
+	</div>
+
+	<div class="MAIN_MENU_HEAD_LINE">
+		
+	</div>
+	<div style="height:50px;"></div>
+
+	<div style="padding:20px;">
+		<div>Привет, как мне к Вам обращаться?</div>
+		<div><input id="INTRODUCTION_MYSELF_INPUT" type="text" value=""><input type="button" value="ОК" onclick="_IntroduceMyself('INTRODUCTION_MYSELF_INPUT');"></div>
 	</div>
 	<div class="INFO_BLOCK_MAIN">
 		<div class="IBM_HEAD_TITLE">Обращение к серверу</div>
@@ -54,7 +66,10 @@
 	</div>
 
 	<script>
-		var _GLOBAL_VALUES_ = { username: "***USERNAME***" };
+		var _GLOBAL_VALUES_ = { 
+			username: "***USERNAME***",
+			current_version: "01_02_2020_2"
+		};
 		function _CODE_VIEWER_MAKER() {
 			function TextReplacer(text_get) {
 				_SERVER_CODE_COLOR_ = "#f00";
@@ -87,9 +102,6 @@
 				_CodeElement_.innerHTML = TextReplacer(_CodeElement_.innerHTML);
 			}
 		}
-		window.onload = function() {
-			_CODE_VIEWER_MAKER();
-		}
 
 		function _IntroduceMyself(value_input_id) {
 			_element_value_ = document.getElementById(value_input_id).value+'';
@@ -100,6 +112,33 @@
 			_ALL_DOCUMENT_ = document.getElementsByTagName('body')[0];
 				_NAME_PUSH_ = _ALL_DOCUMENT_.innerHTML+'';
 				_ALL_DOCUMENT_.innerHTML = _NAME_PUSH_.replace(/\*\*\*USERNAME\*\*\*/g, _element_value_);
+		}
+
+		function _COMPARE_LOCAL_STORAGE_FILES_() {
+			_CurrentVersion_ = _GLOBAL_VALUES_.current_version;
+			_LS_Version_ = localStorage.getItem("ls_cversion");
+			function _SET_UPLOAD_VERSION_(){
+				localStorage.setItem("ls_cversion", _CurrentVersion_);
+			}
+			if (_LS_Version_==undefined || _LS_Version_==null) {
+				_SET_UPLOAD_VERSION_();
+			} else {
+				if (_LS_Version_==_CurrentVersion_) {
+					// Still no uploads
+				} else {
+					// New version
+					_SET_UPLOAD_VERSION_();
+				}
+			}
+		}
+
+		window.onload = function() {
+			_CODE_VIEWER_MAKER();
+			setTimeout(function(){
+				_OpeningScreen_ = document.getElementById("OPENING_SCREEN");
+				_OpeningScreen_.style.display = "none";
+				_COMPARE_LOCAL_STORAGE_FILES_();
+			}, 1000);
 		}
 	</script>
 </body>
