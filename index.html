@@ -35,7 +35,7 @@
 			<div style="position:relative;">
 				<br>
 				<input class="M_BUTTON" type="button" value="ДА" onclick="YES();"><br>
-				<input class="M_BUTTON" type="button" value="НЕТ" onmousedown="RUNNING_AWAY(this);">
+				<input class="M_BUTTON" id="TOUCHBTN_ID" type="button" value="НЕТ">
 			</div>
 			</center>
 		</div>
@@ -61,9 +61,8 @@
 
 	<script>
 		window.onload = function() {
-			
-
-
+			var _ELEMENT_ = document.getElementById("TOUCHBTN_ID");
+			_ELEMENT_.addEventListener("touchstart", YES, false);
 		}
 
 		function RUNNING_AWAY(btn) {
