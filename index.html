@@ -23,7 +23,7 @@
 					<div class="img_heart" style="display:inline-block; width:40px; height:40px;"></div>
 				</td>
 				<td style="vertical-align: middle;">
-					<span class="f_t" style="color:#555; font-weight:bold;">НАСТЮША</span>
+					<span class="f_t" style="color:#555; font-weight:bold;">! НАСТЮША !</span>
 				</td>
 				<td>
 					<div class="img_heart" style="display:inline-block; width:40px; height:40px;"></div>
@@ -65,7 +65,8 @@
 			_ELEMENT_.addEventListener("touchstart", RUNNING_AWAY, false);
 		}
 
-		function RUNNING_AWAY(btn) {
+		function RUNNING_AWAY() {
+			var btn = this;
 			var WindMaxX = 300;
 			var WindMaxY = 400;
 			var CurPosX = btn.getBoundingClientRect().top;
