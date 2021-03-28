@@ -1,0 +1,28 @@
+.MC_BackgroundSky {
+	transition:0.5s;
+	position:absolute; top:0px; left:0px;
+	width:100%; height:100%;
+}
+.MC_BackgroundSky.fog { opacity: 0.3; }
+.MC_BS_Sun {	
+	position:absolute; left:0px; bottom:0px; z-index: 1;
+	display: inline-block;	width:128px; height:128px;
+	background-image: url('../src/img/sun.png');
+	background-size:cover;
+}
+.MC_BS_Suburbs {  
+	position:absolute; bottom:0px; 
+	width:50%; height:100%;
+	background-size: 60% auto;
+	background-repeat: no-repeat;
+}
+.MC_BS_Suburbs.left {
+	left:0px;
+	background-image: url('../src/img/layer_1_left.png');
+	background-position: left bottom;
+}
+.MC_BS_Suburbs.right {
+	right:0px;
+	background-image: url('../src/img/layer_1_right.png');
+	background-position: right bottom;
+}

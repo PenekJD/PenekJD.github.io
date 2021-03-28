@@ -1,0 +1,43 @@
+.jd_t_main {
+	font-family: Pixel;
+	display:inline-block;
+	padding:20px;
+	background-color: #fff;
+	border-radius:10px;
+}
+	.jd_t_title {	
+		font-weight:bold; font-size:2rem;
+	}
+	.jd_t_content {
+		font-size:1.5rem;
+	}
+	.jd_t_input input {
+		padding:10px; 
+		font-family: Pixel;
+		border:4px solid #aaa; border-radius:10px;
+		font-size:2rem; font-weight:bold;
+		margin:10px 0px 10px 0px;
+	}
+	.jd_t_input input:hover {
+		border:4px solid #ed974a;
+	}
+	.jd_t_btn {   
+		cursor:pointer;  
+		display: inline-block;
+		padding:10px;
+		font-family: Pixel;
+		font-weight: bold;
+		color:#000;
+		background-color: #eda74a;
+		border-radius: 10px;
+	}
+	.jd_t_btn:hover {
+		background-color: #142a44;
+		color:#fff;
+	}
+
+@media only screen and (max-width:600px) {
+
+
+
+}

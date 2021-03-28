@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+    <meta name="viewport" content="width=450px">
+	<title>ДР Юльки</title>
+    <script type="text/javascript" src="jquery/JQRLib.js"></script>
+</head>
+<body style="margin : 0px; background:#C966FF; font-family: Tahoma;" align="center">
+<style>
+   @font-face {
+    font-family: Stroke; /* Гарнитура шрифта */
+    src: url('src/fonts/stroke.otf'); /* Путь к файлу со шрифтом */
+   }
+    
+    .START_BTN { padding: 20px; display:inline-block; font-family:Stroke; color:#fff;}
+    .START_BTN:active { color:#C966FF;}
+    
+    .MENU_BTN_AFRAME { color:#fff; background:#A84F7B; border:1px solid #FF4E7A; display: inline-block; padding:20px; font-family: Stroke; }
+    .MENU_BTN_AFRAME:active { color:#000; background:#FF4E7A; }
+</style>
+    
+<div style="position:fixed; top:0px; left:0px; width:100%; height:100%;  background-image: url('src/Julie_wallpaper.jpg'); background-size:cover; background-position: center center; ">
+    
+    <div id="ZERO_BLOCK" onclick="OPEN_AFRAME_AR();" style="width:100%; height:100%; position:absolute; top:0px; left:0px; background:#000;">
+        <table style="border-collapse: collapse; width:100%; height:100%; position: absolute; top:0px; left:0px;">
+            <tr>
+                <td style="text-align:center; vertical-align: middle; width:100%; height:100%; color:#fff; font-size: 0.5cm;">
+                    <div>welcome to</div>
+                    <div style="font-weight:bold;">Grinchik Dmitry's projects</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="HELLO_BLOCK" style="width:100%; height:100%; position:absolute; top:0px; left:0px; display:none;">
+        <table style="border-collapse: collapse; width:100%; height:100%; position: absolute; top:0px; left:0px;">
+            <tr>
+                <td style="text-align:center; vertical-align: middle; width:100%; height:100%;">
+                    <div style="padding:15px; background:rgba(0,0,0,0.5); font-size: 0.5cm; color:#fff; text-shadow:1px 1px 1px rgba(0,0,0,1);">
+                        <div style="padding:10px;">
+                            <div style="border:4px solid #c966ff; border-radius:100px; width:150px; height:150px; display: inline-block; background-color:#fff; background-image:url('src/img/Bunny.png'); background-size: cover;"></div>
+                        </div>
+                        <div style="position:relative; display:inline-block; background:#7A4F7B; border-radius:15px;">
+                            <div style="position:absolute; top:-30px; left:47%; border:20px solid transparent; border-bottom:10px solid #7A4F7B;"></div>
+                            <div id="PAST_FRAZE_HERE" style="padding:15px; text-align:left; font-size:0.4cm;">Привет, Юля!<br>Это я, твой зая! <br><br> Прости, но нет времени обьяснять, ты должна помочь мне найти тайный артефакт, который поможет всем кошкам и котам превзойти в мимимишности собак!</div>
+                        </div><br>
+                        <div class="START_BTN" step="1" onclick="NEXT_MSG(this);">Я готова!</div> 
+                    </div>
+                    <div id="START_BTN_DIV" style="display:none; padding:15px; /* background:rgba(0,0,0,0.5); */ font-size: 1cm; color:#fff; text-shadow:1px 1px 1px rgba(0,0,0,1);">
+                        <div class="START_BTN" onclick="OPEN_AFRAME_AR();">Начать поиски</div> 
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+     <div id="PROGRAMM_MENU" style="position:absolute; top:0px; left:0px; width:100%; height:100%; display:none; text-shadow: 1px 1px 1px rgba(0,0,0,1);">
+        <table style="border-collapse: collapse; width:100%; height:100%; position: absolute; top:0px; left:0px;">
+            <tr>
+                <td style="text-align:center; vertical-align: middle; width:100%; height:100%;">
+                    <div style="color:#fff; font-family:Stroke; font-size:0.6cm;">Подсказки:</div>
+                    <div style="color:#fff; display:inline-block; text-align: left;">
+                        <ul>
+                            <li>Первая часть: Почисти принтер</li>
+                            <li>Вторая часть: Проверь свой компьютер</li>
+                            <li>Третья часть: Полей цветочек </li>
+                        </ul>
+                    </div>
+                    <div style="padding:40px; color:#fff; ">
+                        <div style="padding:40px; border:4px solid #fff;">
+                            <div>Узнай пароль и введи его ниже!</div>
+                             <div><input id="PASSWORD_INPUT" style="font-size:0.4cm; width:100%;" type="text" /></div>
+                            <div style="padding:10px;">
+                                <input style="font-size:0.4cm; padding:10px;" type="button" value="ПРОВЕРИТЬ ПАРОЛЬ" onclick="CHECK_PASSWORD();"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:10x 40px 10px 40px; color:#fff; background:rgba(0,0,0,0.5);">
+                        <div style="padding:40px;">
+                            <div>ВНИМАНИЕ: чтобы дешифратор работал корректно, необходимо разрешить ему доступ к камере, если будет запрос!</div>
+                            <div style="padding:10px;"><input style="font-size:0.4cm; padding:10px;" type="button" value="ОТКРЫТЬ ДЕШИФРАТОР" onclick="OPEN_AFRAME_AR();"/></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+         </table>
+    </div>
+    
+    <div id="AFRAME_DIV" style="position:absolute; top:0px; left:0px; width:100%; height:100%; display:none;">
+        <iframe id="MAIN_AFRAME" src="" style="width:100%; height:100%; position: absolute; top:0px; left:0px; border:0px solid transparent;"></iframe>
+        <div style="position:absolute; top:0px; left:0px; width:100%; background:rgb(0,0,0,0.5);" align="left">
+            <div class="MENU_BTN_AFRAME" onclick="BACK_TO_MENU();">
+                Назад
+            </div>
+        </div>
+    </div>
+    
+    <div id="WINNER" style="width:100%; height:100%; position:absolute; top:0px; left:0px; display:none;">
+        <table style="border-collapse: collapse; width:100%; height:100%; position: absolute; top:0px; left:0px;">
+            <tr>
+                <td style="text-align:center; vertical-align: middle; width:100%; height:100%;">
+                    <div style="padding:15px; background:rgba(0,0,0,0.5); font-size: 0.5cm; color:#fff; text-shadow:1px 1px 1px rgba(0,0,0,1);">
+                        <div style="padding:10px;">
+                            <div style="border:4px solid #c966ff; border-radius:100px; width:150px; height:150px; display: inline-block; background-color:#fff; background-image:url('src/img/Bunny.png'); background-size: cover;"></div>
+                        </div>
+                        <div style="position:relative; display:inline-block; background:#7A4F7B; border-radius:15px;">
+                            <div style="position:absolute; top:-30px; left:47%; border:20px solid transparent; border-bottom:10px solid #7A4F7B;"></div>
+                            <div style="padding:15px; text-align:left; font-size:0.4cm;">МЯУ!!! Юля, ты мой герой! Данные расшифрованы.<br><br> Но тебе нужно поторопиться. Собаки вот-вот коснуться своими мокрыми носами артефакта.
+                            <br><br>
+                            Я ОТПРАВИЛ ТЕБЕ ПОСЫЛКУ НА ПОЧТУ. Срочно проверь!
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+    
+    <script>
+        
+        function WINNER_GO() {
+            PROGRAMM_MENU = document.getElementById("PROGRAMM_MENU");
+            WINNER = document.getElementById("WINNER");
+            PROGRAMM_MENU.style.display = "none";
+            WINNER.style.display = "";
+        }
+        
+        function CHECK_PASSWORD() {
+            PASSWORD_INPUT = document.getElementById("PASSWORD_INPUT");
+            _VALUE_ = PASSWORD_INPUT.value;
+            _VALUE_ = _VALUE_.toLowerCase();
+            WORD_1 = _VALUE_.indexOf('покорми');
+            WORD_2 = _VALUE_.indexOf('своего');
+            WORD_3 = _VALUE_.indexOf('кота');  
+            if (WORD_1!=-1 && WORD_2!=-1 && WORD_3!=-1) {
+                WINNER_GO();
+            } else {
+                alert("ПАРОЛЬ НЕВЕРНЫЙ!");
+            }
+        }
+        
+        function BACK_TO_MENU() {
+            AFRAME_DIV = document.getElementById("AFRAME_DIV");
+            PROGRAMM_MENU = document.getElementById("PROGRAMM_MENU");
+            PROGRAMM_MENU.style.display = "block";
+            AFRAME_DIV.style.display = "none";
+        }
+        
+        function NEXT_MSG(element) {    
+            PAST_FRAZE_HERE = document.getElementById("PAST_FRAZE_HERE");
+            THIS_STEP = element.getAttribute('step');
+            THIS_STEP = THIS_STEP*1;
+            FRAZE = "";
+            BTN_TEXT = "Далее";
+            ACTION = "NEXT_MSG(this);";
+            if (THIS_STEP==1) {
+                FRAZE = "Мрряяяууу! Я знал, что на тебя можно положиться!";
+            }
+            if (THIS_STEP==2) {
+                FRAZE = "Мерзкие собаки зашифровали пароль и разделили его на три части. К счастью наш соседский кот из Секретной Службы по Борьбе с Милыми Песиками создал дешифратор и получил наводку, где могут быть эти части.";
+            }
+            if (THIS_STEP==3) {
+                FRAZE = "Тебе предстоит использовать программу для поиска артефакта.<br><br>Она очень простая. Давай ее откроем и найдем артефакт!";
+                BTN_TEXT = "Открыть программу";
+                ACTION = "START_PROGRAMM_SCANER();";
+            } 
+            PAST_FRAZE_HERE.innerHTML = FRAZE;
+            element.innerHTML = BTN_TEXT;
+            element.setAttribute('onclick', ACTION);
+            THIS_STEP++;
+            element.setAttribute('step', THIS_STEP);
+        }
+        
+        function START_PROGRAMM_SCANER() {
+            HELLO_BLOCK = document.getElementById("HELLO_BLOCK");
+            PROGRAMM_MENU = document.getElementById("PROGRAMM_MENU");
+            HELLO_BLOCK.style.display = "none";
+            PROGRAMM_MENU.style.display = "";
+        }
+        
+        function StartAllGame(){
+            ZERO_BLOCK = document.getElementById("ZERO_BLOCK");
+            HELLO_BLOCK = document.getElementById("HELLO_BLOCK");
+            TEST_FS();
+            setTimeout(function(){
+                $(ZERO_BLOCK).fadeOut(500);
+                setTimeout(function(){
+                    $(HELLO_BLOCK).fadeIn(500);
+                }, 500);
+            }, 500);
+        }
+    
+        function OPEN_AFRAME_AR() {
+            HELLO_BLOCK = document.getElementById("HELLO_BLOCK");
+            ZERO_BLOCK = document.getElementById("ZERO_BLOCK");
+            AFRAME_DIV = document.getElementById("AFRAME_DIV");
+                MAIN_AFRAME = document.getElementById("MAIN_AFRAME");
+            $(HELLO_BLOCK).fadeOut(300);
+            $(ZERO_BLOCK).fadeOut(300);
+            setTimeout(function(){
+                SRC_NOW = MAIN_AFRAME.getAttribute('src');
+                $(AFRAME_DIV).fadeIn(300);
+                if (SRC_NOW=="") {
+                    MAIN_AFRAME.src = "ar2.html";
+                }
+            }, 300);
+        }
+        
+        function TEST_FS() {
+            function openFullscreen() {
+              if (document.body.requestFullscreen) {
+                document.body.requestFullscreen();
+              } else if (document.body.mozRequestFullScreen) { // Firefox 
+                document.body.mozRequestFullScreen();
+              } else if (document.body.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                document.body.webkitRequestFullscreen();
+              } else if (document.body.msRequestFullscreen) { // IE/Edge
+                document.body.msRequestFullscreen();
+              }
+            }
+            openFullscreen();
+        }
+        
+
+    </script>
+</body>
+</html>
+
+
