@@ -1,0 +1,48 @@
+/* FONTS */
+@font-face {
+	font-family: Pixel;
+	src: url('../src/fonts/Thintel.ttf');
+}
+
+body { margin:0px; padding:0px; height:100%; height: 100vh;  }
+
+/* Main Sheet styles */
+#TEMPLATES { display:none;  }
+#LOADING_SCREEN {	
+	display:flex; width:100%; height:100%; z-index:100;
+	align-items:center; justify-content: center;
+	position:fixed; top:0px; left:0px;	
+	background-color: #333;
+}
+	#LOADING_SCREEN div {	
+		display: inline-block; 
+		background-image: url('../src/img/loading.gif');
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size:100%;
+		font-family:Pixel; font-weight: normal; font-size: 2rem;
+		text-align: center;
+		color:#fff;
+		text-shadow: 2px 2px 0px rgba(0,0,0,1);
+		padding: 120px 0px 0px 0px;
+	}
+
+.MAIN_CONTENT {
+	background-color:#000;
+	background-position:center center; background-size:cover;
+	height:100vh;
+	transition: 0.3s;
+	position:relative; z-index:0;
+}
+.POPUP_WINDOWS {
+	transition: 0.3s;
+	display: flex !important; width:100%; height:100%; z-index: 100;
+	align-items:center; justify-content: center;
+	position:fixed; top:0px; left:0px; z-index:10; opacity: 1;
+	background-color:rgba(0,0,0,0.5);
+}
+
+/* EFFECTS */
+.blury { transition:0.3s; filter:blur(15px); }
+.hidden { transition:0.3s; display:none !important; opacity: 0; }
+.Center { text-align: center; align-content: center; }

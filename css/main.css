@@ -1,48 +1,96 @@
-/* FONTS */
-@font-face {
-	font-family: Pixel;
-	src: url('../src/fonts/Thintel.ttf');
-}
+body {	margin:0px;	overflow: hidden; }
 
-body { margin:0px; padding:0px; height:100%; height: 100vh;  }
-
-/* Main Sheet styles */
-#TEMPLATES { display:none;  }
-#LOADING_SCREEN {	
-	display:flex; width:100%; height:100%; z-index:100;
-	align-items:center; justify-content: center;
-	position:fixed; top:0px; left:0px;	
-	background-color: #333;
+.loading_screen {
+	transition:1s;
+	position:fixed; top:0px; left:0px;
+	pointer-events: none;
+	height:100%; width:100%;
+	display:flex; 	z-index: 200; justify-content: center; align-items:center;
+	background-color:rgba(0,160,0,0.4);
+	background-image: url('../img/logos/menucells.png');
+	background-size:cover; background-position: center center;
+	backdrop-filter:blur(25px);
+	-webkit-backdrop-filter:blur(8px);
 }
-	#LOADING_SCREEN div {	
-		display: inline-block; 
-		background-image: url('../src/img/loading.gif');
-		background-position: center center;
-		background-repeat: no-repeat;
-		background-size:100%;
-		font-family:Pixel; font-weight: normal; font-size: 2rem;
-		text-align: center;
-		color:#fff;
-		text-shadow: 2px 2px 0px rgba(0,0,0,1);
-		padding: 120px 0px 0px 0px;
+.loading_screen.hidden {	opacity:0;	}
+	.ls_logo {
+		width:50%;
 	}
 
-.MAIN_CONTENT {
-	background-color:#000;
-	background-position:center center; background-size:cover;
-	height:100vh;
-	transition: 0.3s;
-	position:relative; z-index:0;
-}
-.POPUP_WINDOWS {
-	transition: 0.3s;
-	display: flex !important; width:100%; height:100%; z-index: 100;
-	align-items:center; justify-content: center;
-	position:fixed; top:0px; left:0px; z-index:10; opacity: 1;
-	background-color:rgba(0,0,0,0.5);
+#main_babylon_canvas {
+	width:100%;
+	height:100%;
+	position: relative;
+	z-index: 10;
 }
 
-/* EFFECTS */
-.blury { transition:0.3s; filter:blur(15px); }
-.hidden { transition:0.3s; display:none !important; opacity: 0; }
-.Center { text-align: center; align-content: center; }
+.MAIN_HUD { display:none;
+	position:fixed;
+	top:10px;
+	left:10px;
+	border-radius: 10px;
+	padding:20px;
+	font-family:Century Gothic;
+	background-color:rgba(255,255,255,0.4);
+	backdrop-filter:blur(8px);
+	-webkit-backdrop-filter:blur(8px);
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.MAIN_HUD table {
+	border-collapse: collapse;
+	width:100%;
+}
+.MAIN_HUD table td {
+	padding:5px;
+}
+.MAIN_HUD table td:first-child {	width:128px; vertical-align: middle;	}
+.MAIN_HUD img {		width:100px;	}
+
+.MAIN_INTERFACE {
+	width:100%; position:absolute; top:0px; left:0px; 
+}
+	.MI_Crosshair {	position:absolute; top:49%; left:50%; z-index: 100; pointer-events: none;	}
+	.MI_Crosshair div {	
+		position:absolute; top:-16px; left:-16px;
+		background-image:url('../img/effects/crosshair.png');
+		background-size:200% 100%;
+		width:32px; height:32px;
+	}
+	.MI_TargetTitle {	position:absolute; top:60%; width:100%; left:0%; z-index: 100; text-align: center; align-content: center;	}
+	.MI_TargetTitle div {	
+		display:inline-block;
+		color:#fff; font-weight: bold; text-shadow:1px 1px 1px rgba(0,0,0,0.8);
+		font-size:12px;
+		text-align: center;
+		font-family: Tahoma;
+	}
+	.MI_Subtitles {	position:absolute; top:75%; width:100%; left:0%; z-index: 100; text-align: center; align-content: center;	}
+	.MI_Subtitles div {	
+		display:inline-block;
+		color:#fff; font-weight: bold; text-shadow:1px 1px 1px rgba(0,0,0,0.8);
+		font-size:14px;
+		text-align: center;
+		font-family: Tahoma;
+	}
+
+	.MI_Colection {
+		position:absolute; top:20px; right:20px;
+		z-index: 100;
+	}
+	.MI_C_Icon {
+		transition:0.3s;
+		cursor:pointer; display:inline-block; 
+		width:50px; height:50px;
+		background-size:cover; background-position: center center;
+		border-radius: 8px;	border:2px solid transparent;
+		background-color:rgba(255,255,255,0.4);
+		backdrop-filter:blur(8px);
+		-webkit-backdrop-filter:blur(8px);
+		box-shadow: 0 0 5px rgba(0,0,0,0.5);
+	}
+		.MI_C_Icon:hover {	
+			border:2px solid #eda74a;
+			transform:scale(1.1);
+		}
+	.backpack {	background-image:url('../img/effects/backpack256.png');	}

@@ -1,52 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<script type="text/javascript" src="./src/JQRLib.js"></script>
-	<script type="text/javascript" src="./src/main.js"></script>
-	<script type="text/javascript" src="./src/skyController.js"></script>
-	<script type="text/javascript" src="./src/popUpController.js"></script>
+	<meta charset="utf-8">
+	<title>Sam4ever world</title>
 	<link href="./css/main.css" rel="stylesheet">
-	<link href="./css/main_media.css" rel="stylesheet">
-	<link href="./css/main_sky.css" rel="stylesheet">
-	<link href="./css/jd_templates.css" rel="stylesheet">
-	<title>Grinchik Dmitry</title>
+	<script type="text/javascript" src="./global_params.js"></script>
+	<script type="text/javascript" src="./level_0.js"></script>
+	<script type="text/javascript" src="./babylon.js"></script>
+	<script type="text/javascript" src="./babylon_import.js"></script>
+	<script type="text/javascript" src="./babylon_pep.js"></script>
+	<script type="text/javascript" src="./cannon.js"></script>
+	<!-- My game scripts -->
+	<script type="text/javascript" src="./gameevents.js"></script>
+	<script type="text/javascript" src="./CharacterController.js"></script>
+	<script type="text/javascript" src="./main.js"></script>
 </head>
 <body>
-	<div id="LOADING_SCREEN"><div>Загрузка...</div></div>
-	<div class="POPUP_WINDOWS hidden" id="POPUP_WINDOWS_BLOCK">Hi</div>
-	<div class="MAIN_CONTENT" id="MAIN_CONTENT_BLOCK">
-		<div class="MC_BackgroundSky">
-			<div class="MC_BS_Sun"></div>
-			<div class="MC_BackgroundSky fog" style="z-index: 5;"></div>
-			<div class="MC_BS_Suburbs left" style="z-index: 2;"></div>
-			<div class="MC_BS_Suburbs right" style="z-index: 2;"></div>
-		</div>
+	<div id="LOADING_SCREEN" class="loading_screen">
+		<img src='./img/logos/main_logo_1024x256.png' class="ls_logo"></div>
 	</div>
 
-<!--	Templates	-->
-<div id="TEMPLATES">
-	<jdtemplate>
-		<div class="jd_t_main">
-			<div class="jd_t_title"><put1></put1></div>
-			<div class="jd_t_content"><put2></put2></div>
+	<div id="game_window_scale" style="width:100vw; height:100vh; position:absolute; top:0px; left:0px;"></div>
+	<div class="MAIN_INTERFACE" id="interface_element">
+		<canvas id="main_babylon_canvas"></canvas>
+		<div class="MI_Crosshair" id="crosshair_element"><div></div></div>
+		<div class="MI_Subtitles" id="subtitles_element"><div></div></div>
+		<div class="MI_TargetTitle" id="targettitle_element"><div></div></div>
+		<div class="MI_Colection">
+			<div class="MI_C_Icon backpack"></div>
 		</div>
-	</jdtemplate>
-	<jdtemplate>
-		<div class="jd_t_main">
-			<div class="jd_t_title Center"><put1></put1></div>
-			<div class="jd_t_content Center"><put2></put2></div>
-			<div class="jd_t_input Center"><input type="text" placeholder=""></div>
-			<div class="jd_t_content Center"><div class="jd_t_btn"><put3></put3></div></div>
-		</div>
-	</jdtemplate>
-	<jdtemplate>
-		<div class="jd_t_main">
-			<div class="jd_t_title"><put1></put1></div>
-			<div class="jd_t_content"><put2></put2></div>
-			<div class="jd_t_content Center"><div class="jd_t_btn"><put3></put3></div></div>
-		</div>
-	</jdtemplate>
-</div>	
+	</div>
+	<div class="MAIN_HUD">
+		<table><tr>
+			<td><img src="./img/jdlogo.png"></td>
+			<td>
+				<div><b>Hello!</b></div>
+				<div>Perhaps someday there will <br>be something incredible here...</div>
+				<br>
+				<div style="display:none;"><span style="float:right; color:#333; font-weight:bold;"><span style="color:#304FFF;">j</span>D</span></div>
+			</td>
+		</tr></table>
+	</div>
 </body>
 </html>
