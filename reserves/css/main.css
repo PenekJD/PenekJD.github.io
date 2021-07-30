@@ -1,0 +1,58 @@
+body {	margin:0px;	overflow: hidden; }
+
+#main_babylon_canvas {
+	width:100%;
+	height:100%;
+	position: relative;
+	z-index: 10;
+}
+
+.MAIN_HUD { display:none;
+	position:fixed;
+	top:10px;
+	left:10px;
+	border-radius: 10px;
+	background-color:rgba(255,255,255,0.4);
+	padding:20px;
+	font-family:Century Gothic;
+	backdrop-filter:blur(8px);
+	-webkit-backdrop-filter:blur(8px);
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.MAIN_HUD table {
+	border-collapse: collapse;
+	width:100%;
+}
+.MAIN_HUD table td {
+	padding:5px;
+}
+.MAIN_HUD table td:first-child {	width:128px; vertical-align: middle;	}
+.MAIN_HUD img {		width:100px;	}
+
+.MAIN_INTERFACE {
+	width:100%; position:absolute; top:0px; left:0px;
+}
+	.MI_Crosshair {	position:absolute; top:49%; left:50%; z-index: 100;	}
+	.MI_Crosshair div {	
+		position:absolute; top:-16px; left:-16px;
+		background-image:url(../img/effects/crosshair.png);
+		background-size:200% 100%;
+		width:32px; height:32px;
+	}
+	.MI_TargetTitle {	position:absolute; top:60%; width:100%; left:0%; z-index: 100; text-align: center; align-content: center;	}
+	.MI_TargetTitle div {	
+		display:inline-block;
+		color:#fff; font-weight: bold; text-shadow:1px 1px 1px rgba(0,0,0,0.8);
+		font-size:12px;
+		text-align: center;
+		font-family: Tahoma;
+	}
+	.MI_Subtitles {	position:absolute; top:75%; width:100%; left:0%; z-index: 100; text-align: center; align-content: center;	}
+	.MI_Subtitles div {	
+		display:inline-block;
+		color:#fff; font-weight: bold; text-shadow:1px 1px 1px rgba(0,0,0,0.8);
+		font-size:14px;
+		text-align: center;
+		font-family: Tahoma;
+	}

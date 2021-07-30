@@ -114,15 +114,21 @@ function CController(canvas, scene) {
 //Hero
 
    var hero = BABYLON.Mesh.CreateBox('hero', 4.0, scene, false, BABYLON.Mesh.FRONTSIDE);
-   	GLOBAL_PARAM.hero = hero;
     hero.position.x = 0.0;
-    hero.position.y = 100.0;
+    hero.position.y = 2.0;
     hero.position.z = 0.0;
     hero.isVisible = false;
     hero.physicsImpostor = new BABYLON.PhysicsImpostor(hero, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 10, restitution: 1.0, friction: 0.1 }, scene);     
     // hero.physicsImpostor.physicsBody.fixedRotation = true;
     // hero.physicsImpostor.physicsBody.updateMassProperties();
 
+    // pointer
+    var pointer = BABYLON.Mesh.CreateSphere("Sphere", 16.0, 0.01, scene, false, BABYLON.Mesh.DOUBLESIDE);
+    // move the sphere upward 1/2 of its height
+    pointer.position.x = 0.0;
+    pointer.position.y = 0.0;
+    pointer.position.z = 0.0;
+    pointer.isPickable = false;
 
     var moveForward = false;
     var moveBackward = false;
@@ -183,11 +189,16 @@ function CController(canvas, scene) {
     document.addEventListener('keyup', onKeyUp, false);
     
     
-    scene.registerBeforeRender(function () {   
+    scene.registerBeforeRender(function () {
+        //Your code here
+        //Step
+            //let stats = document.getElementById("stats");
+            //stats.innerHTML = "";             
 
         camera.position.x = hero.position.x;
         camera.position.y = hero.position.y+2;
         camera.position.z = hero.position.z;
+        pointer.position = camera.getTarget();
         
         var forward = camera.getTarget().subtract(camera.position).normalize();
         forward.y = 0;
@@ -197,7 +208,7 @@ function CController(canvas, scene) {
         var SPEED = 22;
         let f_speed = 0;
         var s_speed = 0;
-        var u_speed = 12;
+        var u_speed = 0;
 
 		if (moveForward || moveBackward || moveRight || moveLeft) {
 			CameraShaking(camera);
@@ -223,21 +234,30 @@ function CController(canvas, scene) {
         hero.physicsImpostor.physicsBody.velocity.x = move.x;
         hero.physicsImpostor.physicsBody.velocity.z = move.z;
         hero.physicsImpostor.physicsBody.velocity.y = move.y;
+        
     });
 
-   //Jump
-   /*
-    function jump(){
-      hero.physicsImpostor.applyImpulse(new BABYLON.Vector3(1, 2000, -1), hero.getAbsolutePosition());
+    /*//WASD
+    camera.keysUp.push(87); 
+    camera.keysDown.push(83);            
+    camera.keysRight.push(68);
+    camera.keysLeft.push(65);
+    */
+
+    
+    //Jump
+   /* function jump(){
+      hero.physicsImpostor.applyImpulse(new BABYLON.Vector3(1, 20, -1), hero.getAbsolutePosition());
     }
 
-    document.body.onkeydown = function(e){
+    document.body.onkeyup = function(e){
       if(e.keyCode == 32){
         //your code
-        setTimeout(jump(), 50); 
+        console.log("jump");
+        setTimeout(jump(), 10000); 
+
       }
     }*/
-
 
     //Mouse
     //We start without being locked.
@@ -245,15 +265,22 @@ function CController(canvas, scene) {
     
     // On click event, request pointer lock
     scene.onPointerDown = function (evt) {
+        
+        //true/false check if we're locked, faster than checking pointerlock on each single click.
         if (!isLocked) {
             canvas.requestPointerLock = canvas.requestPointerLock || canvas.msRequestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock;
             if (canvas.requestPointerLock) {
                 canvas.requestPointerLock();
             }
         }
+        
+        //continue with shooting requests or whatever :P
+        //evt === 1 (mouse wheel click (not scrolling))
+        //evt === 2 (right mouse click)
     };
     
 
+    // Event listener when the pointerlock is updated (or removed by pressing ESC for example).
     var pointerlockchange = function () {
         var controlEnabled = document.mozPointerLockElement || document.webkitPointerLockElement || document.msPointerLockElement || document.pointerLockElement || null;
         
@@ -278,80 +305,7 @@ function CController(canvas, scene) {
 
 
 
-
-
 //PublicGameFunctions
-
 function CC_HelloEmenet(arg) {
-	CC_SubtitleControl(arg[1], 5)
-}
-
-function CC_Snitch(arg) {
-	var HideModel = arg[0];
-
-    //Create a scaling animation at 30 FPS
-    var animationBox = new BABYLON.Animation("tutoAnimation", "position.y", 10, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
-    var keys = [];
-    keys.push({
-        frame: 0,
-        value: -100
-    });
-    animationBox.setKeys(keys);
-    HideModel.animations.push(animationBox);
-	var anim = GLOBAL_PARAM.scene.beginAnimation(HideModel, 0, 100, false);
-
-	CC_SubtitleControl(arg[1], 5);
-}
-
-function CC_SpinDatBitch(arg) {
-	var Model = arg[0];
-    //Create a scaling animation at 30 FPS
-    var keys = [];
-    	keys.push({ frame: 0, value: Math.PI/180 });
-    	keys.push({ frame: 0, value: Math.PI/180 });
-    	keys.push({ frame: 100, value: Math.PI/180*360 });
-    var animationRot = new BABYLON.Animation(
-    	"tutoAnimation", 
-    	"rotation.y",
-    	10,
-    	BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-    	BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
-    );
-    var keysPos = [];
-    	keysPos.push({ frame: 0, value: new BABYLON.Vector3(Model.position.x*(-1), Model.position.y, Model.position.z) });
-    var animationPosition = new BABYLON.Animation(
-    	"position", 
-    	"position",
-    	1,
-    	BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-    	BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
-    );
-	animationRot.setKeys(keys);
-	animationPosition.setKeys(keysPos);
-    Model.animations.push(animationRot);
-    Model.animations.push(animationPosition);
-	var anim = GLOBAL_PARAM.scene.beginAnimation(Model, 0, 100, true);
-
-}
-
-function CC_GameStartChain() {
-	var MonologChain = [];
-		MonologChain.push(["Привет, странник!", 4]);
-		MonologChain.push(["Добро пожаловать в Sam4ever World...", 5]);
-
-		var a = 0;
-		function CallSubNext(sec) {
-			setTimeout(function(){
-				a++;
-				CallSub();
-			}, sec*1000);
-		}
-		function CallSub() {
-			CC_SubtitleControl(MonologChain[a][0], MonologChain[a][1]);
-			try { NextVal = MonologChain[a+1][0]; } catch(no) { NextVal=undefined; }
-			if (NextVal!=undefined && NextVal!=null && NextVal!="") {
-				CallSubNext(MonologChain[a][1]);
-			}
-		}
-		CallSub();
+	CC_SubtitleControl(arg, 5)
 }

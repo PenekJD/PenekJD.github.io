@@ -127,6 +127,7 @@ function MAIN_SceneGenerator(engine, canvas) {
     BuildTheWall(0,7.2,-60,  0,0,Math.PI,  40,5,0.5);
     BuildTheWall(0,7.2,60,  Math.PI*2,0,Math.PI*2,  40,5,0.5);
     BuildTheWall(60,7.2,0,  0,Math.PI/180*90,Math.PI*2,  40,5,0.5);
+    BuildTheWall(-60,7.2,0,  0,Math.PI/180*270,Math.PI*2,  40,5,0.5);
 
 
 

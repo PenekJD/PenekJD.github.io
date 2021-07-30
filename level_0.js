@@ -14,7 +14,7 @@ var LEVEL_LOAD = {
 			"model":"column.glb",
 			"scaling":[6,6,6],
 			"rotation":[0,0,0],
-			"position":[20,0,20],
+			"position":[20,0,60],
 			"texture": "./models/egypt/column.png",
 			"alpha": false,
 			"texture_scale": [1, 1],
@@ -37,7 +37,7 @@ var LEVEL_LOAD = {
 			"model":"column.glb",
 			"scaling":[6,6,6],
 			"rotation":[0,0,0],
-			"position":[-20,0,-20],
+			"position":[-20,0,60],
 			"texture": "./models/egypt/column.png",
 			"alpha": false,
 			"texture_scale": [1, 1],
@@ -53,6 +53,40 @@ var LEVEL_LOAD = {
 	                "arg": "Вот и нет Вашей колонны :)"
 	            }
 			]
+		},
+		{
+			"name":"",
+			"folder":"./models/egypt/",
+			"model":"column.glb",
+			"scaling":[6,6,6],
+			"rotation":[0,0,0],
+			"position":[-20,0,-60],
+			"texture": "./models/egypt/column.png",
+			"alpha": false,
+			"texture_scale": [1, 1],
+			"normal": "./models/egypt/column_nm.png",
+			"collision":true,
+			"cast_shadow":true,
+			"contains_shadow":false,
+			"create_collision":true,
+			"touch_events":[]
+		},
+		{
+			"name":"",
+			"folder":"./models/egypt/",
+			"model":"column.glb",
+			"scaling":[6,6,6],
+			"rotation":[0,0,0],
+			"position":[20,0,-60],
+			"texture": "./models/egypt/column.png",
+			"alpha": false,
+			"texture_scale": [1, 1],
+			"normal": "./models/egypt/column_nm.png",
+			"collision":true,
+			"cast_shadow":true,
+			"contains_shadow":false,
+			"create_collision":true,
+			"touch_events":[]
 		},
 		{
 			"name":"",
