@@ -283,7 +283,7 @@ function CController(canvas, scene) {
 //PublicGameFunctions
 
 function CC_HelloEmenet(arg) {
-	CC_SubtitleControl(arg[1], 5)
+	CC_SubtitleControl(arg[1], 5);
 }
 
 function CC_Snitch(arg) {
@@ -336,8 +336,10 @@ function CC_SpinDatBitch(arg) {
 
 function CC_GameStartChain() {
 	var MonologChain = [];
-		MonologChain.push(["Привет, странник!", 4]);
-		MonologChain.push(["Добро пожаловать в Sam4ever World...", 5]);
+		MonologChain.push(["<span><sam>Sam:</sam> Hello, stranger!</span>", 3]);
+		MonologChain.push(["<span><sam>Sam:</sam> Welcome to Sam4ever World...</span>", 4]);
+		MonologChain.push(["<span><sam>Sam:</sam> Big quest is coming!</span>", 4]);
+		MonologChain.push(["<span><sam>Sam:</sam> Comeback later. You'll love it!</span>", 4]);
 
 		var a = 0;
 		function CallSubNext(sec) {

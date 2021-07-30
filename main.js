@@ -190,7 +190,6 @@ function MAIN_SceneGenerator(engine, canvas) {
         GAMEEVENTS_Collisions(GLOBAL_PARAM.scene);
         GLOBAL_PARAM.hero.position.y = 2.0;
         MAIN_HideLoadingScreen();
-        CC_GameStartChain();
     });
     return scene;
 

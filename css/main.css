@@ -73,6 +73,8 @@ body {	margin:0px;	overflow: hidden; }
 		text-align: center;
 		font-family: Tahoma;
 	}
+	.MI_Subtitles span { background-color:rgba(0,0,0,0.4); padding:10px; border-radius:5px;  }
+	.MI_Subtitles span sam { color:#eda74a;  }
 
 	.MI_Colection {
 		position:absolute; top:20px; right:20px;

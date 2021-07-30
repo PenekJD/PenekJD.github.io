@@ -127,6 +127,29 @@ var LEVEL_LOAD = {
 	                "arg": ""
 	            }
 			]
+		},
+		{
+			"name":"",
+			"folder":"./models/chars/",
+			"model":"SeriousSam.glb",
+			"scaling":[2, 2, 2],
+			"rotation":[Math.PI/180*90, Math.PI/180, 0],
+			"position":[0, 0, 8],
+			"texture": "./models/chars/SeriousSam.png",
+			"alpha": false,
+			"texture_scale": [1, 1],
+			"normal": undefined,
+			"collision":true,
+			"cast_shadow":true,
+			"contains_shadow":false,
+			"create_collision":false,
+			"touch_events":[
+				{
+	                "helpText" : "Press E to talk",
+	                "callFunc" : "CC_GameStartChain",
+	                "arg": ""
+	            }
+			]
 		}
 	]
 }
