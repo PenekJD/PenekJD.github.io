@@ -29,7 +29,8 @@ var LEVEL_LOAD = {
 	                "callFunc" : "CC_HelloEmenet",
 	                "arg": "Привет, крошка..."
 	            }
-			]
+			],
+			"render_distance":130
 		},
 		{
 			"name":"",
@@ -52,7 +53,8 @@ var LEVEL_LOAD = {
 	                "callFunc" : "CC_Snitch",
 	                "arg": "Вот и нет Вашей колонны :)"
 	            }
-			]
+			],
+			"render_distance":130
 		},
 		{
 			"name":"",
@@ -69,7 +71,8 @@ var LEVEL_LOAD = {
 			"cast_shadow":true,
 			"contains_shadow":false,
 			"create_collision":true,
-			"touch_events":[]
+			"touch_events":[],
+			"render_distance":130
 		},
 		{
 			"name":"",
@@ -86,16 +89,17 @@ var LEVEL_LOAD = {
 			"cast_shadow":true,
 			"contains_shadow":false,
 			"create_collision":true,
-			"touch_events":[]
+			"touch_events":[],
+			"render_distance":130
 		},
 		{
 			"name":"",
 			"folder":"./models/egypt/",
 			"model":"palm.glb",
 			"scaling":[1,1,1],
-			"rotation":[0, Math.PI/180*90, 0],
+			"rotation":[Math.PI/180*90, Math.PI/180*90, 0],
 			"position":[11, 0, -12],
-			"texture": "./models/egypt/palm.png",
+			"texture": "./models/egypt/palm512.png",
 			"alpha": true,
 			"texture_scale": [1, 1],
 			"normal": undefined,
@@ -103,16 +107,17 @@ var LEVEL_LOAD = {
 			"cast_shadow":true,
 			"contains_shadow":false,
 			"create_collision":true,
-			"touch_events":[]
+			"touch_events":[],
+			"render_distance":70
 		},
 		{
 			"name":"",
 			"folder":"./models/egypt/",
 			"model":"palm.glb",
-			"scaling":[0.8, 0.8, 0.8],
-			"rotation":[0, Math.PI/180*200, 0],
-			"position":[11, 0, -12],
-			"texture": "./models/egypt/palm.png",
+			"scaling":[0.8, 0.8, 1.2],
+			"rotation":[Math.PI/180*90, Math.PI/180*200, 0],
+			"position":[-11, 0, -12],
+			"texture": "./models/egypt/palm512.png",
 			"alpha": true,
 			"texture_scale": [1, 1],
 			"normal": undefined,
@@ -122,11 +127,12 @@ var LEVEL_LOAD = {
 			"create_collision":true,
 			"touch_events":[
 				{
-	                "helpText" : "Spin, bitch!",
+	                "helpText" : "",
 	                "callFunc" : "CC_SpinDatBitch",
 	                "arg": ""
 	            }
-			]
+			],
+			"render_distance":70
 		},
 		{
 			"name":"",
@@ -149,7 +155,8 @@ var LEVEL_LOAD = {
 	                "callFunc" : "CC_GameStartChain",
 	                "arg": ""
 	            }
-			]
+			],
+			"render_distance":70
 		}
 	]
 }

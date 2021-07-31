@@ -100,6 +100,7 @@ function CController(canvas, scene) {
     camera.attachControl(canvas, true); 
     camera.rotation = new BABYLON.Vector3(0, Math.PI/180, Math.PI/180);
     GLOBAL_PARAM.camera = camera;
+    //camera.maxZ = GLOBAL_PARAM.maxZ;
 
 //MyRayCast
 	var MyRay = BABYLON.Mesh.CreateBox("box", 3.0, scene);

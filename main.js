@@ -68,6 +68,7 @@ function MAIN_SceneGenerator(engine, canvas) {
                         "arg": [result.meshes[1], tEvent.arg]
                     });
                 }
+                result.meshes[1].addLODLevel(mdlObj.render_distance,  null);
             });
 
         }
@@ -143,7 +144,7 @@ function MAIN_SceneGenerator(engine, canvas) {
 
 
     /*  Постобработка    */
-    setTimeout(function() {
+    function Main_POST_SHADOWS() {
         var shadowGenerator = new BABYLON.ShadowGenerator(1024, light0);
             for (a=0; a<SHADOWS_CONTAINS.length; a++) {
                 SHADOWS_CONTAINS[a].receiveShadows = true;
@@ -153,7 +154,7 @@ function MAIN_SceneGenerator(engine, canvas) {
 
             shadowGenerator.getShadowMap().refreshRate = BABYLON.RenderTargetTexture.REFRESHRATE_RENDER_ONCE;
             light0.autoUpdateExtends = false;     
-    },1000);
+    }
 
 
     /* Объемный свет */
@@ -188,7 +189,9 @@ function MAIN_SceneGenerator(engine, canvas) {
         EVENTS_COLLECTION[0].toucher = GLOBAL_PARAM.MyRay;
         GAMEEVENTS_StartAttaching();
         GAMEEVENTS_Collisions(GLOBAL_PARAM.scene);
-        GLOBAL_PARAM.hero.position.y = 2.0;
+        GLOBAL_PARAM.hero.position.y = 2;
+        GLOBAL_PARAM.hero.position.z = -30;
+        Main_POST_SHADOWS();
         MAIN_HideLoadingScreen();
     });
     return scene;

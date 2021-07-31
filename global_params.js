@@ -16,6 +16,7 @@ var GLOBAL_PARAM = {};
 	GLOBAL_PARAM.sHeight = 576;
 	GLOBAL_PARAM.scene;		//Main scene
 	GLOBAL_PARAM.camera;	//Player Camera
+	GLOBAL_PARAM.maxZ = 100;	
 	GLOBAL_PARAM.MyRay;		//Ray from eyes
 	GLOBAL_PARAM.hero;
 
