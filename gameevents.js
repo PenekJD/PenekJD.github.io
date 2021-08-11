@@ -1,4 +1,41 @@
+function GAMEEVENTS_DisableToucher(condition) {
+	CC_CROSSHAIR_CONTROL('');
+	GLOBAL_PARAM.ControlDisabled = condition;
+}
 
+function GAMEEVENTS_AttachTouchFieldsEvents(toucher, touchElement, scene, HelpText, callFunc, arg) {
+	if (toucher.actionManager==undefined || toucher.actionManager==null || toucher.actionManager=="") {
+		toucher.actionManager = new BABYLON.ActionManager(scene);
+	}
+    toucher.actionManager.registerAction(
+	    new BABYLON.ExecuteCodeAction(	//InterpolateValueAction
+	        {
+	            trigger: BABYLON.ActionManager.OnIntersectionEnterTrigger, 
+	            parameter: { 
+	                mesh: touchElement, 
+	                usePreciseIntersection: true
+	            }
+	        }, 
+	        function() {
+	        	window[callFunc](arg);
+	        }
+	    )
+	);
+	toucher.actionManager.registerAction(
+	    new BABYLON.ExecuteCodeAction(
+	        {
+	            trigger: BABYLON.ActionManager.OnIntersectionExitTrigger, 
+	            parameter: { 
+	                mesh: touchElement, 
+	                usePreciseIntersection: true
+	            }
+	        }, 
+	        function() {	
+	        	
+	        }
+	    )
+	);
+}
 
 function GAMEEVENTS_AttachHoverEvents(toucher, touchElement, scene, HelpText, callFunc, arg) {
 	if (toucher.actionManager==undefined || toucher.actionManager==null || toucher.actionManager=="") {
@@ -14,7 +51,9 @@ function GAMEEVENTS_AttachHoverEvents(toucher, touchElement, scene, HelpText, ca
 	            }
 	        }, 
 	        function() {	
-	        	CC_CROSSHAIR_CONTROL('catched', HelpText, callFunc, arg);
+	        	if (GLOBAL_PARAM.ControlDisabled==false) { 
+	        		CC_CROSSHAIR_CONTROL('catched', HelpText, callFunc, arg);
+	        	}
 	        }
 	    )
 	);
@@ -27,12 +66,14 @@ function GAMEEVENTS_AttachHoverEvents(toucher, touchElement, scene, HelpText, ca
 	                usePreciseIntersection: true
 	            }
 	        }, 
-	        function() {	CC_CROSSHAIR_CONTROL('');	}
+	        function() {	
+	        	if (GLOBAL_PARAM.ControlDisabled==false) { CC_CROSSHAIR_CONTROL(''); }
+	        }
 	    )
 	);
 }
 
-function GAMEEVENTS_StartAttaching() {
+function GAMEEVENTS_StartAttaching() { 
 	for (a=0; a<EVENTS_COLLECTION.length; a++) {
 		var toucher = EVENTS_COLLECTION[a].toucher; 
 		for (b=0; b<EVENTS_COLLECTION[a].touchElements.length; b++) {
@@ -40,7 +81,11 @@ function GAMEEVENTS_StartAttaching() {
 			var HelpText = EVENTS_COLLECTION[a].touchElements[b].helpText;
 			var callFunc = EVENTS_COLLECTION[a].touchElements[b].callFunc;
 			var arg = EVENTS_COLLECTION[a].touchElements[b].arg;
-			GAMEEVENTS_AttachHoverEvents(toucher, touchElement, GLOBAL_PARAM.scene, HelpText, callFunc, arg);
+			if (a==0) {	//Only for crosshair (first toucher)
+				GAMEEVENTS_AttachHoverEvents(toucher, touchElement, GLOBAL_PARAM.scene, HelpText, callFunc, arg);
+			} else {
+				GAMEEVENTS_AttachTouchFieldsEvents(toucher, touchElement, GLOBAL_PARAM.scene, HelpText, callFunc, arg);
+			}
 		}
 	}
 }
@@ -52,17 +97,18 @@ function GAMEEVENTS_Collisions(scene) {
     }
     for (let a=0; a<MODELS_COLLISION.length; a++) {
         let ModelMesh = MODELS_COLLISION[a];
-        let box2 = BABYLON.Mesh.CreateBox("box", 2.0, scene);
-            box2.rotation = ModelMesh.rotation;
-            box2.scaling = ModelMesh.scaling;
-                box2.scaling.y = box2.scaling.y*2;
-            box2.position = ModelMesh.position;
-                box2.position.x = ModelMesh.position.x*(-1);
-                box2.position.y+=box2.scaling.y/2
+        
+        let box = BABYLON.Mesh.CreateBox("box", 2.0, scene);
+            box.rotation = ModelMesh.rotation;
+            box.scaling = ModelMesh.scaling;
+                box.scaling.y = box.scaling.y*2;
+            box.position = ModelMesh.position;
+                box.position.x = ModelMesh.position.x*(-1);
+                box.position.y+=box.scaling.y/2
             //box.rotation = ModelMesh.rotation;
             //box.scaling = ModelMesh.scaling;
-            box2.checkCollisions = true;
-            box2.isVisible = false;
-            box2.physicsImpostor = new BABYLON.PhysicsImpostor(box2, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.05, friction:0.05 }, scene);
+            box.checkCollisions = true;
+            box.isVisible = false;
+            box.physicsImpostor = new BABYLON.PhysicsImpostor(box, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.05, friction:0.05 }, scene);
     }
 }

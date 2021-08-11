@@ -5,7 +5,7 @@
 	<title>Sam4ever world</title>
 	<link href="./css/main.css" rel="stylesheet">
 	<script type="text/javascript" src="./global_params.js"></script>
-	<script type="text/javascript" src="./level_0.js"></script>
+	<!-- <script type="text/javascript" src="./level_0.js"></script> -->
 	<script type="text/javascript" src="./babylon.js"></script>
 	<script type="text/javascript" src="./babylon_import.js"></script>
 	<script type="text/javascript" src="./babylon_pep.js"></script>
@@ -17,7 +17,13 @@
 </head>
 <body>
 	<div id="LOADING_SCREEN" class="loading_screen">
-		<img src='./img/logos/main_logo_1024x256.png' class="ls_logo"></div>
+		<div class="LS_CONTENT" align="center">
+			<img src='./img/logos/main_logo_1024x256.png' class="ls_logo">
+			<div class="LS_TEXT">
+				<div id="LS_TITLE_ID" class="LS_title"></div>
+				<div id="LS_DESC_ID" class="LS_desc"></div>
+			</div>
+		</div>
 	</div>
 
 	<div id="game_window_scale" style="width:100vw; height:100vh; position:absolute; top:0px; left:0px;"></div>
@@ -30,7 +36,7 @@
 			<div class="MI_C_Icon backpack"></div>
 		</div>
 	</div>
-	<div class="MAIN_HUD">
+	<div class="MAIN_HUD" id="MENU_HUD" opened="closed" style="display:none;">
 		<table><tr>
 			<td><img src="./img/jdlogo.png"></td>
 			<td>

@@ -16,6 +16,27 @@ function CC_SubtitleControl(text, hideTime) {
 	}, hideTime);
 }
 
+function CC_SubtitlesChain(_arr_) {
+	var a = 0;
+	function CallSubNext(sec) {
+		setTimeout(function(){
+			a++;
+			CallSub();
+		}, sec*1000);
+	}
+	function CallSub() {
+		CC_SubtitleControl(_arr_[a][0], _arr_[a][1]);
+		try { NextVal = _arr_[a+1][0]; } catch(no) { NextVal=undefined; }
+		if (NextVal!=undefined && NextVal!=null && NextVal!="") {
+			CallSubNext(_arr_[a][1]);
+		}
+		if (_arr_[a][2]!=undefined && _arr_[a][2]!=null && _arr_[a][2]!="") {
+			window[_arr_[a][2]](_arr_[a][3]);
+		}
+	}
+	CallSub();
+}
+
 function CC_TargetTitleControl(text) {
 	var SUBTITLE_ELEMENT = document.getElementById("targettitle_element").getElementsByTagName("div")[0];
 	SUBTITLE_ELEMENT.innerHTML = text;
@@ -46,6 +67,34 @@ function CC_CROSSHAIR_CONTROL(catchType, helpText, actionFunc, params) {
 function CC_USE_GAME_ELEMENT(params) {
 	if (USE_SOMETHING.func!="" && USE_SOMETHING.func!=undefined && USE_SOMETHING.func!=null) {
 		window[USE_SOMETHING.func](USE_SOMETHING.params);
+	}
+}
+
+
+function CC_ExitOrActivatePointerLock(condition) {
+	if (condition==true) {	
+        GLOBAL_PARAM.canvas.requestPointerLock = GLOBAL_PARAM.canvas.requestPointerLock || GLOBAL_PARAM.canvas.msRequestPointerLock || GLOBAL_PARAM.canvas.mozRequestPointerLock || GLOBAL_PARAM.canvas.webkitRequestPointerLock;
+            GLOBAL_PARAM.canvas.requestPointerLock();
+	} else {
+		document.exitPointerLock();
+	}
+}
+
+
+function CC_OpenCloseMenu(menu_id) {
+	var MenuDOM = document.getElementById(menu_id);
+	var Status = MenuDOM.getAttribute("opened");
+	var setStyle = "";
+	if (Status=="closed") {		//Opening menu
+		MenuDOM.classList.remove("hidden");
+		MenuDOM.setAttribute("opened", "opened");
+		MenuDOM.style.display = setStyle;
+		CC_ExitOrActivatePointerLock();
+	} else {					//Closing menu
+		setStyle = "none";
+		MenuDOM.classList.add("hidden");
+		MenuDOM.setAttribute("opened", "closed");
+		setTimeout(function(){	MenuDOM.style.display = setStyle;	}, 300);
 	}
 }
 
@@ -114,8 +163,12 @@ function CController(canvas, scene) {
 
 //Hero
 
-   var hero = BABYLON.Mesh.CreateBox('hero', 4.0, scene, false, BABYLON.Mesh.FRONTSIDE);
+   var hero = BABYLON.Mesh.CreateSphere('hero', 3, 4, false, BABYLON.Mesh.FRONTSIDE);
    	GLOBAL_PARAM.hero = hero;
+    EVENTS_COLLECTION.push({
+            "toucher" : GLOBAL_PARAM.hero,
+            "touchElements": []
+        });
     hero.position.x = 0.0;
     hero.position.y = 100.0;
     hero.position.z = 0.0;
@@ -129,12 +182,13 @@ function CController(canvas, scene) {
     var moveBackward = false;
     var moveRight = false;
     var moveLeft = false;
+    var PressEcape = false;
     
     var onKeyDown = function (event) {
         switch (event.keyCode) {
             case 38: // up
             case 87: // w
-                moveForward = true;
+                moveForward = true; 
                 break;
 
             case 37: // left
@@ -152,6 +206,10 @@ function CController(canvas, scene) {
                 break;
 
             case 32: // space
+                break;
+
+            case 81: // q
+            	PressEcape = true;
                 break;
         }
     };
@@ -177,6 +235,9 @@ function CController(canvas, scene) {
             case 68: // d
                 moveRight = false;
                 break;
+
+            case 81: // q
+                break;
         }
     };
 
@@ -201,27 +262,39 @@ function CController(canvas, scene) {
         var u_speed = 12;
 
 		if (moveForward || moveBackward || moveRight || moveLeft) {
-			CameraShaking(camera);
+			if (GLOBAL_PARAM.ControlDisabled==false) {
+				CameraShaking(camera);
+			}
 		}
 
-        if (moveForward) {
+        if (moveForward && GLOBAL_PARAM.ControlDisabled==false) {
             f_speed = SPEED;
         }
-        if (moveBackward) {
+        if (moveBackward && GLOBAL_PARAM.ControlDisabled==false) {
             f_speed = -SPEED;
         }
 
-        if (moveRight) {
+        if (moveRight && GLOBAL_PARAM.ControlDisabled==false) {
             s_speed = SPEED;
         }
 
-        if (moveLeft) {
+        if (moveLeft && GLOBAL_PARAM.ControlDisabled==false) {
             s_speed = -SPEED;
+        }
+
+        if (PressEcape) {
+		    moveForward = false;
+		    moveBackward = false;
+		    moveRight = false;
+		    moveLeft = false;
+		    PressEcape = false;
+        	//CC_OpenCloseMenu("MENU_HUD");
+        	GAMEEVENTS_DisableToucher(false);
         }
         
         var move = (forward.scale(f_speed)).subtract((right.scale(s_speed))).subtract(camera.upVector.scale(u_speed));
         
-        hero.physicsImpostor.physicsBody.velocity.x = move.x;
+        hero.physicsImpostor.physicsBody.velocity.x = move.x-0.2;
         hero.physicsImpostor.physicsBody.velocity.z = move.z;
         hero.physicsImpostor.physicsBody.velocity.y = move.y;
     });
@@ -242,15 +315,12 @@ function CController(canvas, scene) {
 
     //Mouse
     //We start without being locked.
-    var isLocked = false;
+    var isLocked = GLOBAL_PARAM.cursor_locked;
     
     // On click event, request pointer lock
     scene.onPointerDown = function (evt) {
-        if (!isLocked) {
-            canvas.requestPointerLock = canvas.requestPointerLock || canvas.msRequestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock;
-            if (canvas.requestPointerLock) {
-                canvas.requestPointerLock();
-            }
+        if (!GLOBAL_PARAM.cursor_locked) {
+            CC_ExitOrActivatePointerLock(true);
         }
     };
     
@@ -261,10 +331,10 @@ function CController(canvas, scene) {
         // If the user is already locked
         if (!controlEnabled) {
             //camera.detachControl(canvas);
-            isLocked = false;
+            GLOBAL_PARAM.cursor_locked = false;
         } else {
             //camera.attachControl(canvas);
-            isLocked = true;
+            GLOBAL_PARAM.cursor_locked = true;
         }
     };
     
@@ -275,86 +345,4 @@ function CController(canvas, scene) {
     document.addEventListener("webkitpointerlockchange", pointerlockchange, false);
 
     return camera;
-}
-
-
-
-
-
-//PublicGameFunctions
-
-function CC_HelloEmenet(arg) {
-	CC_SubtitleControl(arg[1], 5);
-}
-
-function CC_Snitch(arg) {
-	var HideModel = arg[0];
-
-    //Create a scaling animation at 30 FPS
-    var animationBox = new BABYLON.Animation("tutoAnimation", "position.y", 10, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
-    var keys = [];
-    keys.push({
-        frame: 0,
-        value: -100
-    });
-    animationBox.setKeys(keys);
-    HideModel.animations.push(animationBox);
-	var anim = GLOBAL_PARAM.scene.beginAnimation(HideModel, 0, 100, false);
-
-	CC_SubtitleControl(arg[1], 5);
-}
-
-function CC_SpinDatBitch(arg) {
-	var Model = arg[0];
-    //Create a scaling animation at 30 FPS
-    var keys = [];
-    	keys.push({ frame: 0, value: Math.PI/180 });
-    	keys.push({ frame: 0, value: Math.PI/180 });
-    	keys.push({ frame: 100, value: Math.PI/180*360 });
-    var animationRot = new BABYLON.Animation(
-    	"tutoAnimation", 
-    	"rotation.y",
-    	10,
-    	BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-    	BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
-    );
-    var keysPos = [];
-    	keysPos.push({ frame: 0, value: new BABYLON.Vector3(Model.position.x*(-1), Model.position.y, Model.position.z) });
-    var animationPosition = new BABYLON.Animation(
-    	"position", 
-    	"position",
-    	1,
-    	BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-    	BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
-    );
-	animationRot.setKeys(keys);
-	animationPosition.setKeys(keysPos);
-    Model.animations.push(animationRot);
-    Model.animations.push(animationPosition);
-	var anim = GLOBAL_PARAM.scene.beginAnimation(Model, 0, 100, true);
-
-}
-
-function CC_GameStartChain() {
-	var MonologChain = [];
-		MonologChain.push(["<span><sam>Sam:</sam> Hello, stranger!</span>", 3]);
-		MonologChain.push(["<span><sam>Sam:</sam> Welcome to Sam4ever World...</span>", 4]);
-		MonologChain.push(["<span><sam>Sam:</sam> Big quest is coming!</span>", 4]);
-		MonologChain.push(["<span><sam>Sam:</sam> Comeback later. You'll love it!</span>", 4]);
-
-		var a = 0;
-		function CallSubNext(sec) {
-			setTimeout(function(){
-				a++;
-				CallSub();
-			}, sec*1000);
-		}
-		function CallSub() {
-			CC_SubtitleControl(MonologChain[a][0], MonologChain[a][1]);
-			try { NextVal = MonologChain[a+1][0]; } catch(no) { NextVal=undefined; }
-			if (NextVal!=undefined && NextVal!=null && NextVal!="") {
-				CallSubNext(MonologChain[a][1]);
-			}
-		}
-		CallSub();
 }

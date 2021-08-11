@@ -1,4 +1,11 @@
+@font-face {
+	font-family: Pixel;
+	src: url('../src/fonts/Thintel.ttf');
+}
+
 body {	margin:0px;	overflow: hidden; }
+	*{ opacity: 1; }
+	.hidden {	opacity:0;	}
 
 .loading_screen {
 	transition:1s;
@@ -16,6 +23,19 @@ body {	margin:0px;	overflow: hidden; }
 	.ls_logo {
 		width:50%;
 	}
+	.LS_CONTENT {
+		color:#fff;	width:100%; font-family: Tahoma;
+	}
+	.LS_TEXT { 
+		position:absolute; bottom:0px; left:0px;
+		width:80%; text-align: left; padding:0px 20px 20px 20px;
+	}
+	.LS_TEXT .LS_title {
+		font-weight:bold; font-size:0.5cm;
+	}
+	.LS_TEXT .LS_desc {
+		font-size:0.3cm;
+	}
 
 #main_babylon_canvas {
 	width:100%;
@@ -24,8 +44,9 @@ body {	margin:0px;	overflow: hidden; }
 	z-index: 10;
 }
 
-.MAIN_HUD { display:none;
-	position:fixed;
+.MAIN_HUD { /* display:none; */
+	transition:0.3s; opacity:1;
+	position:fixed; z-index: 10;
 	top:10px;
 	left:10px;
 	border-radius: 10px;
@@ -36,6 +57,7 @@ body {	margin:0px;	overflow: hidden; }
 	-webkit-backdrop-filter:blur(8px);
 	box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
+
 
 .MAIN_HUD table {
 	border-collapse: collapse;
