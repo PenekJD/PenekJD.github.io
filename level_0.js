@@ -1,5 +1,7 @@
 var LEVEL_LOAD = {
 	editable_mode:true,
+	outline_mode:true,
+	cellshading_mode:false,
 	world_color : {
 		"diffuse":[0.85, 0.65, 0.45],
 		"specular":[0.2, 0.2, 0.2],
@@ -13,7 +15,7 @@ var LEVEL_LOAD = {
 		"r":[0,0,0]
 	},
 	start_marker: {
-		"p":[0,0,-30], "r":[0,0,0]
+		"p":[0,0,-30], "r":Math.PI/180
 	},
 	skybox:{
 		"scale":10000,
@@ -38,6 +40,15 @@ var LEVEL_LOAD = {
 		{
 			"id":"collision_mark",
 			"texture": "./img/collision_mark.png",
+			"normal": "",
+			"detail": "",
+			"t_s": [1, 1], "n_s": [1, 1], "d_s": [1, 1],
+			"alpha": true, "opacity":true,
+			"reflection": ""
+		},
+		{
+			"id":"collision_mark_red",
+			"texture": "./img/collision_mark_red.png",
 			"normal": "",
 			"detail": "",
 			"t_s": [1, 1], "n_s": [1, 1], "d_s": [1, 1],
@@ -74,6 +85,15 @@ var LEVEL_LOAD = {
 		{
 			"id":"sam",
 			"texture": "./models/chars/SeriousSam.png",
+			"normal": "",
+			"detail": "",
+			"t_s": [1, 1], "n_s": [1, 1], "d_s": [1, 1],
+			"alpha": true,
+			"reflection": ""
+		},
+		{
+			"id":"sam_smile",
+			"texture": "./models/chars/SeriousSam_smile.png",
 			"normal": "",
 			"detail": "",
 			"t_s": [1, 1], "n_s": [1, 1], "d_s": [1, 1],
@@ -336,14 +356,21 @@ function LEVEL_GameStartChain(arg) {
 	var Model = arg[0];
 
 	var MonologChain = [];
-		MonologChain.push(["<span><sam>Sam:</sam> Hello, stranger!</span>", 3]);
+		MonologChain.push(["<span><sam>Sam:</sam> Привет,путник!</span>", 3]);
+		MonologChain.push(["<span><sam>Sam:</sam> Как мне к тебе обращаться?</span>", 4]);
 		MonologChain.push([" ", 4, 'LEVEL_NewMission', [Model]]);
 	CC_SubtitlesChain(MonologChain);
+
+    const Anim = GLOBAL_PARAM.scene.getAnimationGroupByName("Speak");
+    Anim.start(false, 1.0, Anim.from, Anim.to, false);
+    Model.material = GLOBAL_PARAM.materials["sam_smile"];
 }
 
 function LEVEL_NewMission(arg) {
-	GAMEEVENTS_DisableToucher(true);
-	CC_OpenCloseMenu("MENU_HUD");
+	let Model = arg[0];
+		Model.material = GLOBAL_PARAM.materials["sam"];
+	//GAMEEVENTS_DisableToucher(true);
+	//CC_OpenCloseMenu("MENU_HUD");
 }
 
 function LEVEL_LoadLevel(arg) {

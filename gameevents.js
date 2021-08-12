@@ -1,6 +1,12 @@
 function GAMEEVENTS_DisableToucher(condition) {
+	var Crosshair = document.getElementById("crosshair_element").getElementsByTagName("div")[0];
 	CC_CROSSHAIR_CONTROL('');
 	GLOBAL_PARAM.ControlDisabled = condition;
+	if (condition && Crosshair!=undefined && Crosshair!=null && Crosshair!="") {
+		Crosshair.style.display ="none";
+	} else {
+		Crosshair.style.display ="";
+	}
 }
 
 function GAMEEVENTS_AttachTouchFieldsEvents(toucher, touchElement, scene, HelpText, callFunc, arg) {
@@ -108,7 +114,14 @@ function GAMEEVENTS_Collisions(scene) {
             //box.rotation = ModelMesh.rotation;
             //box.scaling = ModelMesh.scaling;
             box.checkCollisions = true;
-            box.isVisible = false;
+            if (LEVEL_LOAD.editable_mode) {
+            	box.material = GLOBAL_PARAM.materials["collision_mark_red"];
+            	box.isVisible = true;
+            	box.addLODLevel(100,  null); 
+            } else {
+            	box.isVisible = false;
+            	box.addLODLevel(20,  null); 
+            }
             box.physicsImpostor = new BABYLON.PhysicsImpostor(box, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.05, friction:0.05 }, scene);
     }
 }

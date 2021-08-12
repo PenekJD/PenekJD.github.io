@@ -6,6 +6,11 @@ var USE_SOMETHING = {};
 	USE_SOMETHING.func = "";
 	USE_SOMETHING.params;
 
+
+function CC_PlayerQuestInput() {
+
+}
+
 function CC_SubtitleControl(text, hideTime) {
 	var SUBTITLE_ELEMENT = document.getElementById("subtitles_element").getElementsByTagName("div")[0];
 	if (hideTime==undefined || hideTime=="" || hideTime==null) { hideTime=0; }
@@ -147,7 +152,7 @@ function CController(canvas, scene) {
     camera.ellipsoid = new BABYLON.Vector3(0, 0, 0);
     camera.checkCollisions = true;
     camera.attachControl(canvas, true); 
-    camera.rotation = new BABYLON.Vector3(0, Math.PI/180, Math.PI/180);
+    camera.rotation = new BABYLON.Vector3(0, 0, 0);
     GLOBAL_PARAM.camera = camera;
     //camera.maxZ = GLOBAL_PARAM.maxZ;
 
@@ -294,7 +299,7 @@ function CController(canvas, scene) {
         
         var move = (forward.scale(f_speed)).subtract((right.scale(s_speed))).subtract(camera.upVector.scale(u_speed));
         
-        hero.physicsImpostor.physicsBody.velocity.x = move.x-0.2;
+        hero.physicsImpostor.physicsBody.velocity.x = move.x;
         hero.physicsImpostor.physicsBody.velocity.z = move.z;
         hero.physicsImpostor.physicsBody.velocity.y = move.y;
     });

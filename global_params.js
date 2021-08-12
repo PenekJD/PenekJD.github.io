@@ -39,6 +39,17 @@ var EVENTS_COLLECTION = [];	//Game events
         });
 
 
+function GlobalParams_SaveData() {
+	var NewDataJSON = {};
+		NewDataJSON.hero_position = GLOBAL_PARAM.hero.position;
+		NewDataJSON = JSON.stringify(NewDataJSON);
+	console.log(NewDataJSON);
+}
+
+function GlobalParams_LoadData() {
+	
+}
+
 function GlobalParams_LevelLoad() {
 	function AddScript(_fileName_) {
 		var AddScript = document.createElement("script");

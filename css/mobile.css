@@ -1,0 +1,17 @@
+/*
+@media only screen and (max-width:768px) {
+
+    .TABLE_SEPARATOR {
+        border-collapse: collapse;
+        width:100%; height:100%;
+    }
+    .TABLE_SEPARATOR .TOP_GAME_WINDOW {
+        height:70vh;
+    }
+    .TABLE_SEPARATOR .MOBILE_CONTROLS {
+        display:table-cell;
+        height:30vh;
+    }
+
+}
+*/

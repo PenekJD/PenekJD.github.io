@@ -3,7 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<title>Sam4ever world</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="./css/main.css" rel="stylesheet">
+	<link href="./css/mobile.css" rel="stylesheet">
 	<script type="text/javascript" src="./global_params.js"></script>
 	<!-- <script type="text/javascript" src="./level_0.js"></script> -->
 	<script type="text/javascript" src="./babylon.js"></script>
@@ -26,26 +28,45 @@
 		</div>
 	</div>
 
-	<div id="game_window_scale" style="width:100vw; height:100vh; position:absolute; top:0px; left:0px;"></div>
-	<div class="MAIN_INTERFACE" id="interface_element">
-		<canvas id="main_babylon_canvas"></canvas>
-		<div class="MI_Crosshair" id="crosshair_element"><div></div></div>
-		<div class="MI_Subtitles" id="subtitles_element"><div></div></div>
-		<div class="MI_TargetTitle" id="targettitle_element"><div></div></div>
-		<div class="MI_Colection">
-			<div class="MI_C_Icon backpack"></div>
-		</div>
-	</div>
-	<div class="MAIN_HUD" id="MENU_HUD" opened="closed" style="display:none;">
-		<table><tr>
-			<td><img src="./img/jdlogo.png"></td>
-			<td>
-				<div><b>Hello!</b></div>
-				<div>Perhaps someday there will <br>be something incredible here...</div>
-				<br>
-				<div style="display:none;"><span style="float:right; color:#333; font-weight:bold;"><span style="color:#304FFF;">j</span>D</span></div>
+	<table class="TABLE_SEPARATOR">
+		<tr>
+			<td class="TOP_GAME_WINDOW">
+				<div id="game_window_scale"></div>
+				<div class="MAIN_INTERFACE" id="interface_element">
+					<canvas id="main_babylon_canvas"></canvas>
+					<div class="MI_Crosshair" id="crosshair_element"><div></div></div>
+					<div class="MI_Subtitles" id="subtitles_element"><div></div></div>
+					<div class="MI_TargetTitle" id="targettitle_element"><div></div></div>
+					<div class="MI_Colection">
+						<div class="MI_C_Icon backpack"></div>
+					</div>
+				</div>
 			</td>
-		</tr></table>
+		</tr>
+		<tr>
+			<td class="MOBILE_CONTROLS">
+				
+			</td>
+		</tr>
+	</table>
+
+	<div class="MAIN_HUD" id="MENU_HUD" opened="closed" style="display:none;">
+
 	</div>
+
+	<!-- TEMPLATES -->
+	<templates style="display:none;">
+		<template>
+			<table><tr>
+				<td><img src="./img/jdlogo.png"></td>
+				<td>
+					<div><b>Hello!</b></div>
+					<div>Perhaps someday there will <br>be something incredible here...</div>
+					<br>
+					<div style="display:none;"><span style="float:right; color:#333; font-weight:bold;"><span style="color:#304FFF;">j</span>D</span></div>
+				</td>
+			</tr></table>
+		</template>
+	</templates>
 </body>
 </html>

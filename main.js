@@ -14,21 +14,21 @@ function MAIN_SceneGenerator(engine, canvas) {
     canvas.height = GLOBAL_PARAM.sHeight;
 
     function MakeOutline(_mesh_) {
-        
-        _mesh_.outlineWidth = 0.01;
-        //_mesh_.backFaceCulling = false;
-        _mesh_.renderOutline = true;
-        _mesh_.outlineColor = new BABYLON.Color4(0,0,0,1);
-        /*
-        var HL = new BABYLON.HighlightLayer("", GLOBAL_PARAM.scene);
-        HL.addMesh(_mesh_, BABYLON.Color3.Black());
-        HL.mainTextureFixedSize = 0;
-        HL.blurTextureSizeRatio = 0;
-        HL.alphaBlendingMode = 0.9;
-        HL.blurVerticalSize = 0;
-        HL.blurHorizontalSize = 0;
-        */
-        
+        if (LEVEL_LOAD.outline_mode) {
+            _mesh_.outlineWidth = 0.01;
+            //_mesh_.backFaceCulling = false;
+            _mesh_.renderOutline = true;
+            _mesh_.outlineColor = new BABYLON.Color4(0,0,0,1);
+            /*
+            var HL = new BABYLON.HighlightLayer("", GLOBAL_PARAM.scene);
+            HL.addMesh(_mesh_, BABYLON.Color3.Black());
+            HL.mainTextureFixedSize = 0;
+            HL.blurTextureSizeRatio = 0;
+            HL.alphaBlendingMode = 0.9;
+            HL.blurVerticalSize = 0;
+            HL.blurHorizontalSize = 0;
+            */
+        }        
     }
 
 	function MaterialsGenerator(scene, vScale, uScale, img, nmap, detail, hasAlpha, reflection, nsX, nsY, dsX, dsY, opacity) {
@@ -37,7 +37,12 @@ function MAIN_SceneGenerator(engine, canvas) {
         if (dsX==undefined || dsX==null || dsX=="") { dsX = vScale; }
         if (dsY==undefined || dsY==null || dsY=="") { dsY = uScale; }
 		let NewMaterial = {};
-			NewMaterial = new BABYLON.StandardMaterial("sand", scene);
+            if (LEVEL_LOAD.cellshading_mode) {
+                NewMaterial = new BABYLON.CellMaterial("", scene);
+                NewMaterial.computeHighLevel = true;
+            } else {
+                NewMaterial = new BABYLON.StandardMaterial("", scene);
+            }
 			NewMaterial.diffuseTexture = new BABYLON.Texture(img, scene);
             NewMaterial.diffuseTexture.vScale = vScale;
             NewMaterial.diffuseTexture.uScale = uScale;
@@ -95,8 +100,8 @@ function MAIN_SceneGenerator(engine, canvas) {
             box.position = new BABYLON.Vector3(pX, pY, pZ);
             box.rotation = new BABYLON.Vector3(rX, rY, rZ);
             box.scaling = new BABYLON.Vector3(sX, sY, sZ);
-            box.material = GLOBAL_PARAM.materials[mat_id];
-            box.checkCollisions = true;
+            
+            box.checkCollisions = true;box.material = GLOBAL_PARAM.materials[mat_id];
             if (shadow=="out") {
                 SHADOWS_ELEMENTS.push(box);
             } else {
@@ -169,7 +174,7 @@ function MAIN_SceneGenerator(engine, canvas) {
         //Creating of models *_*_*_*_*_*_*_*_*_*_*_*
         for (a=0; a<LEVEL_LOAD.models.length; a++) {
             let mdlObj = LEVEL_LOAD.models[a];
-            BABYLON.SceneLoader.ImportMesh(mdlObj.name, mdlObj.folder, mdlObj.model, GLOBAL_PARAM.scene, function (newMeshes, particleSystems, skeletons) {
+            BABYLON.SceneLoader.ImportMesh(mdlObj.name, mdlObj.folder, mdlObj.model, GLOBAL_PARAM.scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
                 function MeshGen(_mesh_, mat_id) {
                     _mesh_.scaling = new BABYLON.Vector3(mdlObj.scaling[0], mdlObj.scaling[1], mdlObj.scaling[2]);
                     _mesh_.rotation = new BABYLON.Vector3(mdlObj.rotation[0], mdlObj.rotation[1], mdlObj.rotation[2]);
@@ -192,6 +197,7 @@ function MAIN_SceneGenerator(engine, canvas) {
                     if (skeletons.length>0) {
                         GLOBAL_PARAM.skeletons = GLOBAL_PARAM.skeletons.concat(skeletons);
                     }
+
                     MakeOutline(_mesh_);
                 }
                 for (a=1; a<newMeshes.length; a++) {
@@ -362,6 +368,7 @@ function MAIN_SceneGenerator(engine, canvas) {
             GLOBAL_PARAM.hero.position.x = LEVEL_LOAD.start_marker.p[0];
             GLOBAL_PARAM.hero.position.y = LEVEL_LOAD.start_marker.p[1]+2;
             GLOBAL_PARAM.hero.position.z = LEVEL_LOAD.start_marker.p[2];
+            GLOBAL_PARAM.camera.rotation = new BABYLON.Vector3(0, LEVEL_LOAD.start_marker.r, 0);
         } else {
             GLOBAL_PARAM.hero.position.y = 2;
         }
